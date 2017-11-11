@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:wicket="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+</head>
+<body>
+<wicket:extend>
+    <div class="container-fluid text-center">
+        <div class="row content">
+            <div class="col-sm-4 sidenav">
+            </div>
+            <div class="col-sm-8 text-center">
+                <form id ="registerForm" method="post" wicket:id="registerForm" class="form-horizontal" STYLE="width:40%">
+                    <div class="form-group">
+                        <div class="alert alert-danger" STYLE="background: white; border-color: white" >
+                            <div wicket:id="feedback"></div>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="text" wicket:id="login" title="Введите логин"
+                                   placeholder="Введите логин" class="form-control">
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="text" wicket:id="name" title="Введите ваше имя"
+                                   placeholder="Введите ваше имя" class="form-control" required>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="text" wicket:id="lastName" title="Введите вашу фамилию"
+                                   placeholder="Введите вашу фамилмю" class="form-control">
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="text" wicket:id="email" title="Введите ваш e-mail"
+                                   placeholder="Введите ваш e-mail" class="form-control" required>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="text" wicket:id="mobile" title="Введите ваш мобильный"
+                                   placeholder="Введите номер вашего мобильного" class="form-control">
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="password" wicket:id="password" title="Введите пароль"
+                                   placeholder="Пароль" class="form-control" required>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="password" wicket:id="passwordConfirmation" title="Введите пароль еще раз"
+                                   placeholder="Подтвердите пароль" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <input type="submit" name="submit" value="ПОДТВЕРДИТЬ" class="btn btn-primary active">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-2 sidenav">
+            </div>
+        </div>
+    </div>
+</wicket:extend>
+</body>
+</html>
