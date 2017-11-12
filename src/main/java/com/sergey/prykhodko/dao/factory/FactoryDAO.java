@@ -1,5 +1,8 @@
 package com.sergey.prykhodko.dao.factory;
 
+import com.sergey.prykhodko.dao.LinkDAO;
+import com.sergey.prykhodko.dao.OrderDAO;
+import com.sergey.prykhodko.dao.SubOrderDAO;
 import com.sergey.prykhodko.dao.UserDAO;
 
 public interface FactoryDAO {
@@ -13,4 +16,12 @@ public interface FactoryDAO {
     }
 
     UserDAO getUserDAO();
+
+    LinkDAO getLinkDAO();
+
+    OrderDAO getOrderDAO();
+
+    SubOrderDAO getSubOrderDAO();
+
+
 }

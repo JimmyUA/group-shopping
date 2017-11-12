@@ -10,11 +10,11 @@ import java.util.List;
 
 public class Order implements Serializable{
 
+    private Integer orderId;
     private boolean isOpened = true;
     private boolean isStarted = false;
     private LocalDate startDate;
     private ShopName shopName;
-    private Integer orderId;
     private List<SubOrder> subOrders;
     private BigDecimal sumOrder;  // All money in 0.01 of grn
 
