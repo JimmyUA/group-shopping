@@ -2,8 +2,10 @@ package com.sergey.prykhodko.front.pages.login;
 
 import com.sergey.prykhodko.front.pages.basepage.BasePage;
 import com.sergey.prykhodko.front.pages.home.HomePage;
+import com.sergey.prykhodko.front.pages.user.cabinet.UserCabinet;
 import com.sergey.prykhodko.front.pages.user.registration.RegistrationPage;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
+import org.apache.wicket.authroles.authorization.strategies.role.Roles;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.StatelessForm;
 import org.apache.wicket.markup.html.form.TextField;
@@ -51,7 +53,13 @@ public class LogInPage extends BasePage {
 
             private void checkIfAuthenticateDone() {
                 if (AuthenticatedWebSession.get().signIn(login, password)){
-                    setResponsePage(HomePage.class);
+                    AuthenticatedWebSession session = (AuthenticatedWebSession) getSession();
+                    Roles role = session.getRoles();
+                    if (role.equals(new Roles(Roles.USER))){
+                        setResponsePage(UserCabinet.class);
+                    } else {
+                        setResponsePage(HomePage.class);
+                    }
                 } else {
                     if (Strings.isEmpty(login)){
                         error(MISSED_LOGIN);

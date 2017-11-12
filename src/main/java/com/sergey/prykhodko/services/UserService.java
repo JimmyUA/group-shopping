@@ -26,4 +26,13 @@ public class UserService {
     public List<String> getAllLogins() {
         return userDAO.getAllLogins();
     }
+
+    public String getPasswordByLogin(String login) {
+        User user = FactoryDAO.getFactory(FactoryType.SPRING).getUserDAO().getByLogin(login);
+        return user.getPassword();
+    }
+
+    public User getUserByLogin(String login) {
+        return FactoryDAO.getFactory(FactoryType.SPRING).getUserDAO().getByLogin(login);
+    }
 }

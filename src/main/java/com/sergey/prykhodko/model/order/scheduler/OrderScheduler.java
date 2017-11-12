@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Thread.sleep;
@@ -16,6 +17,7 @@ public class OrderScheduler implements Serializable{
     private List<Order> orders;
 
     public OrderScheduler() {
+        orders = new ArrayList<>();
     }
 
 

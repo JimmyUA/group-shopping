@@ -37,11 +37,12 @@ public class Main {
 
         ctx.setResources(resources);
 
+        OrderScheduler scheduler = new OrderScheduler();
+        scheduler.addOrder(new Order(ShopName.SPORT_DIRECT));
+        scheduler.start();
+
         tomcat.start();
         tomcat.getServer().await();
 
-        OrderScheduler scheduler = new OrderScheduler();
-		scheduler.addOrder(new Order(ShopName.SPORT_DIRECT));
-		scheduler.start();
     }
 }
