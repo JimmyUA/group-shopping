@@ -42,9 +42,9 @@ public class MenuPanel extends Panel {
         add(new Link(ORDERS_LIST_PAGE_LINK_ID) {
             @Override
             public void onClick() {
-                OrderScheduler scheduler = (OrderScheduler) getApplication().getSessionStore().getAttribute(null, "schrduler");
-                Order order = scheduler.getOrder();
-                setResponsePage(new OrdersListPage(Arrays.asList(order)));
+//                OrderScheduler scheduler = (OrderScheduler) getApplication().getSessionStore().getAttribute(null, "schrduler");
+//                Order order = scheduler.getOrder();
+//                setResponsePage(new OrdersListPage(Arrays.asList(order)));
 
             }
         });

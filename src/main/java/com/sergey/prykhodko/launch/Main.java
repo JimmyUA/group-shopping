@@ -1,5 +1,8 @@
 package com.sergey.prykhodko.launch;
 
+import com.sergey.prykhodko.front.util.ShopName;
+import com.sergey.prykhodko.model.order.Order;
+import com.sergey.prykhodko.model.order.scheduler.OrderScheduler;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.WebResourceRoot;
 import org.apache.catalina.core.StandardContext;
@@ -36,5 +39,9 @@ public class Main {
 
         tomcat.start();
         tomcat.getServer().await();
+
+        OrderScheduler scheduler = new OrderScheduler();
+		scheduler.addOrder(new Order(ShopName.SPORT_DIRECT));
+		scheduler.start();
     }
 }

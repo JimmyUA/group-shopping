@@ -122,6 +122,15 @@
 			<artifactId>commons-codec</artifactId>
 			<version>1.9</version>
 		</dependency>
+
+		<!--DEPENDENCY FOR REACTIVE PROGRAMMING-->
+		<dependency>
+			<groupId>io.projectreactor</groupId>
+			<artifactId>reactor-core</artifactId>
+			<version>3.1.0.RELEASE</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
