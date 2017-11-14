@@ -14,7 +14,7 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.List;
 
-import static com.sergey.prykhodko.util.SQLUserCommands.*;
+import static com.sergey.prykhodko.util.queries.SQLUserCommands.*;
 
 public class UserMySQLDAO implements UserDAO {
     private static final String ID = "id_user";

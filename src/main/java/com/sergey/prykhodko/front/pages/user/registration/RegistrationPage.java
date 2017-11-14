@@ -2,6 +2,7 @@ package com.sergey.prykhodko.front.pages.user.registration;
 
 import com.sergey.prykhodko.front.pages.basepage.BasePage;
 import com.sergey.prykhodko.front.pages.user.cabinet.UserCabinet;
+import com.sergey.prykhodko.front.util.captcha.Captcha;
 import com.sergey.prykhodko.front.util.validators.EmailValidator;
 import com.sergey.prykhodko.front.util.validators.LoginUniquenessValidator;
 import com.sergey.prykhodko.front.util.validators.MobileNumberValidator;
@@ -69,6 +70,8 @@ public class RegistrationPage extends BasePage {
                 add(mobileTextField);
                 add(passwordTextField);
                 add(passwordConfTextField);
+
+                add(new Captcha("captcha"));
 
             }
 

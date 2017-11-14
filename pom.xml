@@ -39,13 +39,12 @@
 			<artifactId>wicket-auth-roles</artifactId>
 			<version>8.0.0-M7</version>
 		</dependency>
-		<!-- OPTIONAL 
+
 			<dependency>
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket-extensions</artifactId>
 			<version>${wicket.version}</version>
 			</dependency>
-		-->
 
 		<!-- LOGGING DEPENDENCIES - LOG4J -->
 

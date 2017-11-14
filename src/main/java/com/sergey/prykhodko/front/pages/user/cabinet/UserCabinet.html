@@ -5,8 +5,13 @@
     <title>Cabinet</title>
 </head>
 <body>
-    <wicket:extend>
-        <div wicket:id="greeting"></div>
-    </wicket:extend>
+<wicket:extend>
+    <div wicket:id="greeting"></div>
+    <div wicket:id="activeOrders"></div>
+        <div wicket:id="activeOrdersView">
+            <div><a href="" wicket:id="orderIDLink"><span wicket:id="linkMessage"></span></a></div><br>
+            <div><span wicket:id="orderSum">[sum]</span></div>
+        </div>
+</wicket:extend>
 </body>
 </html>

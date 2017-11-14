@@ -1,4 +1,4 @@
-package com.sergey.prykhodko.util;
+package com.sergey.prykhodko.util.queries;
 
 public interface SQLUserCommands {
     String INSERT = "INSERT INTO users(login, password, email, name, last_name) " +

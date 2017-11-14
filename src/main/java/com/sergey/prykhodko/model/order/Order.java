@@ -6,6 +6,7 @@ import com.sergey.prykhodko.model.order.suborder.SubOrder;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Order implements Serializable{
@@ -20,6 +21,15 @@ public class Order implements Serializable{
 
 
     public Order() {
+        subOrders = new ArrayList<>();
+    }
+
+    public void setOpened(boolean opened) {
+        isOpened = opened;
+    }
+
+    public void setStarted(boolean started) {
+        isStarted = started;
     }
 
     public Order(ShopName shopName) {
@@ -74,5 +84,9 @@ public class Order implements Serializable{
     public void stop() {
         isStarted = false;
         isOpened = false;
+    }
+
+    public void addSubOrder(SubOrder subOrder) {
+        subOrders.add(subOrder);
     }
 }

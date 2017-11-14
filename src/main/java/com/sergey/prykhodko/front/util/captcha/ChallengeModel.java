@@ -2,7 +2,7 @@ package com.sergey.prykhodko.front.util.captcha;
 
 import org.apache.wicket.model.AbstractReadOnlyModel;
 
-public class ChalangeModel extends AbstractReadOnlyModel<String> {
+public class ChallengeModel extends AbstractReadOnlyModel<String> {
 
     private String challange;
 
@@ -12,7 +12,7 @@ public class ChalangeModel extends AbstractReadOnlyModel<String> {
         if (challange == null){
             challange = String.format("%04d", (int) (Math.random() * 10000));
         }
-        return null;
+        return challange;
     }
 
     public void reset(){

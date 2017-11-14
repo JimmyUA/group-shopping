@@ -11,9 +11,10 @@
             <div class="col-sm-4 sidenav">
             </div>
             <div class="col-sm-8 text-center">
-                <form id ="registerForm" method="post" wicket:id="registerForm" class="form-horizontal" STYLE="width:40%">
+                <form id="registerForm" method="post" wicket:id="registerForm" class="form-horizontal"
+                      STYLE="width:40%">
                     <div class="form-group">
-                        <div class="alert alert-danger" STYLE="background: white; border-color: white" >
+                        <div class="alert alert-danger" STYLE="background: white; border-color: white">
                             <div wicket:id="feedback"></div>
                         </div>
                         <div class="col-sm-10">
@@ -50,6 +51,9 @@
                             <input type="submit" name="submit" value="ПОДТВЕРДИТЬ" class="btn btn-primary active">
                         </div>
                     </div>
+                    <p><label>Captcha</label>
+                        <wicket:container wicket:id="captcha"/>
+                    </p>
                 </form>
             </div>
             <div class="col-sm-2 sidenav">
