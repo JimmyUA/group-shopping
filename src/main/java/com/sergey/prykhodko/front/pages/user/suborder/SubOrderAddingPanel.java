@@ -3,6 +3,8 @@ package com.sergey.prykhodko.front.pages.user.suborder;
 import com.sergey.prykhodko.model.order.Order;
 import com.sergey.prykhodko.model.order.suborder.Link;
 import com.sergey.prykhodko.model.order.suborder.SubOrder;
+import org.apache.wicket.ajax.AjaxEventBehavior;
+import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
@@ -43,9 +45,9 @@ public class SubOrderAddingPanel extends Panel{
         Form<Void> form = new Form<>("form");
         TextField<String> linkTF = new TextField<>("linkTF", new Model<>());
         form.add(linkTF);
-        NumberTextField<Integer> amountTF = new NumberTextField<>("amountTF", new Model<>());
+        NumberTextField<Integer> amountTF = new NumberTextField<>("amountTF", new Model<>(), Integer.class);
         form.add(amountTF);
-        TextField<String> sumTF = new TextField<>("sumTF", new Model<>());
+        TextField<String> sumTF = new TextField<>("sumTF", new Model<>(""));
         form.add(sumTF);
         form.add(new Button("addButton"){
             @Override
@@ -53,15 +55,18 @@ public class SubOrderAddingPanel extends Panel{
                 super.onSubmit();
                 String link = linkTF.getModelObject();
                 Integer amount = amountTF.getModelObject();
-                double sumFloat = Double.parseDouble(sumTF.getModelObject());
+                double sumFloat = Double.parseDouble(sumTF.getInput());
                 BigInteger price = BigInteger.valueOf(Double.doubleToLongBits(100 * sumFloat));
 
                 Link linkObject = new Link();
                 linkObject.setLinkString(link);
                 linkObject.setItemAmount(amount);
                 linkObject.setItemPrice(price);
+                subOrder.addLink(linkObject);
 
             }
         });
+        add(linksDataView);
+        add(form);
     }
 }

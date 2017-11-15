@@ -4,6 +4,7 @@ import com.sergey.prykhodko.model.user.User;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SubOrder {
@@ -14,6 +15,7 @@ public class SubOrder {
     private BigInteger sumSubOrder;  // All money in 0.01 of grn
 
     public SubOrder() {
+        links = new ArrayList<>();
     }
 
 
@@ -90,5 +92,9 @@ public class SubOrder {
                 ", isPaid=" + isPaid +
                 ", sumSubOrder=" + sumSubOrder +
                 '}';
+    }
+
+    public void addLink(Link link) {
+        links.add(link);
     }
 }

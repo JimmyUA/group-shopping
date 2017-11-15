@@ -19,5 +19,6 @@ public class SubOrderAddingPage extends BasePage {
         String currentLabelMessage = "текущая сумма: " + order.getSumOrder() + " гривен";
         add(new Label("orderLabel", orderLabelMessage));
         add(new Label("currentSumLabel", currentLabelMessage));
+        add(new SubOrderAddingPanel("subOrderAdding", order));
     }
 }
