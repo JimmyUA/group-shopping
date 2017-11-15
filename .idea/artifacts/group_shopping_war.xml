@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="group-shopping:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="group-shoping-1.0-SNAPSHOT.war">
-      <element id="artifact" artifact-name="group-shopping:war exploded" />
-    </root>
-  </artifact>
-</component>
