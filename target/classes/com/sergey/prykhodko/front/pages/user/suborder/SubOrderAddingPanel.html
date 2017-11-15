@@ -1,0 +1,16 @@
+<wicket:panel xmlns:wicket="http://www.w3.org/1999/xhtml">
+    <table>
+        <tr wicket:id="linksDataView">
+            <td><span wicket:id="link"></span></td>
+            <td><span wicket:id="amount"></span></td>
+            <td><span wicket:id="sum"></span></td>
+        </tr>
+    </table>
+
+    <form wicket:id="form">
+        <input type="text" wicket:id="linkTF" placeholder="Вставьте ссылку на товар">
+        <input type="number" wicket:id="amountTF" placeholder="Введите количество единиц">
+        <input type="text" wicket:id="sumTF" placeholder="Введите цену за единицу товара">
+        <input type="submit" wicket:id="addButton" value="Добавить в подзаказ">
+    </form>
+</wicket:panel>
