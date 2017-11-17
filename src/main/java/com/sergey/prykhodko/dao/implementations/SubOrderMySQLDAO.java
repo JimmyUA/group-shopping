@@ -4,6 +4,7 @@ import com.sergey.prykhodko.dao.SubOrderDAO;
 import com.sergey.prykhodko.model.order.suborder.SubOrder;
 import com.sergey.prykhodko.util.ClassName;
 import com.sergey.prykhodko.util.DataSources;
+import com.sergey.prykhodko.util.queries.SQLOrderCommands;
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
@@ -12,8 +13,10 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
+import java.util.List;
 
 import static com.sergey.prykhodko.util.queries.SQLSubOrderCommands.GET_LAST_ID;
+import static com.sergey.prykhodko.util.queries.SQLSubOrderCommands.GET_SUBORDERS_BY_ORDER_ID;
 import static com.sergey.prykhodko.util.queries.SQLSubOrderCommands.INSERT;
 
 public class SubOrderMySQLDAO implements SubOrderDAO {
@@ -58,6 +61,14 @@ public class SubOrderMySQLDAO implements SubOrderDAO {
     @Override
     public Integer getLastId() {
         return jdbcTemplate.queryForObject(GET_LAST_ID, Integer.class);
+    }
+
+    @Override
+    public List<SubOrder> getSubOrdersByOrderId(Integer orderId) {
+        PreparedStatementSetter setter = ps -> {
+            ps.setInt(1, orderId);
+        };
+        return jdbcTemplate.query(GET_SUBORDERS_BY_ORDER_ID, setter, rowMapper);
     }
 
     private PreparedStatementSetter getAddPreparedStatementSetter(SubOrder subOrder) {

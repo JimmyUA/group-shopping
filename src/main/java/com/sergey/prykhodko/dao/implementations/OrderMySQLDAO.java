@@ -48,7 +48,7 @@ public class OrderMySQLDAO implements OrderDAO {
         Order order = new Order();
         order.setOrderId(rs.getInt(ID));
         order.setStartDate(rs.getDate(START_DATE).toLocalDate());
-        order.setSumOrder(BigDecimal.valueOf(rs.getInt(SUM_ORDER)));
+        order.setSumOrder(rs.getInt(SUM_ORDER));
         order.setOpened(rs.getBoolean(IS_OPENED));
         order.setStarted(rs.getBoolean(IS_STARTED));
         order.setShopName(getShopNameByID(rs.getInt(SHOP_ID)));
@@ -72,5 +72,17 @@ public class OrderMySQLDAO implements OrderDAO {
             ps.setBoolean(1, true);
         };
         return jdbcTemplate.query(SQLOrderCommands.GET_ACTIVE_ORDERS, setter, rowMapper);
+    }
+
+    @Override
+    public void update(Order order) {
+        PreparedStatementSetter setter = ps -> {
+            int i = 1;
+            ps.setBoolean(i++, order.isOpened());
+            ps.setBoolean(i++, order.isStarted());
+            ps.setInt(i, order.getSumOrder());
+        };
+
+        jdbcTemplate.update(SQLOrderCommands.UPDATE, setter);
     }
 }

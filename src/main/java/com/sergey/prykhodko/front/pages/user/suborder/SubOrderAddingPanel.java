@@ -5,6 +5,7 @@ import com.sergey.prykhodko.model.order.Order;
 import com.sergey.prykhodko.model.order.suborder.Link;
 import com.sergey.prykhodko.model.order.suborder.SubOrder;
 import com.sergey.prykhodko.model.user.User;
+import com.sergey.prykhodko.services.OrderService;
 import com.sergey.prykhodko.services.SubOrderService;
 import com.sergey.prykhodko.services.UserService;
 import org.apache.wicket.markup.html.basic.Label;
@@ -80,6 +81,7 @@ public class SubOrderAddingPanel extends Panel {
                 super.onSubmit();
                 order.addSubOrder(subOrder);
                 SubOrderService.getSubOrderService(FactoryType.SPRING).addSubOrder(subOrder);
+                OrderService.getOrderService(FactoryType.SPRING).updateOrder(order);
             }
         };
     }

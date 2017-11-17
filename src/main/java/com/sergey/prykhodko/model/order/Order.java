@@ -17,11 +17,25 @@ public class Order implements Serializable{
     private LocalDate startDate;
     private ShopName shopName;
     private List<SubOrder> subOrders;
-    private BigDecimal sumOrder;  // All money in 0.01 of grn
+    private Integer sumOrder = 0;  // All money in 0.01 of grn
 
 
     public Order() {
         subOrders = new ArrayList<>();
+    }
+
+    public List<SubOrder> getSubOrders() {
+        return subOrders;
+    }
+
+
+    public void setSubOrders(List<SubOrder> subOrders) {
+
+        this.subOrders = subOrders;
+        for (SubOrder suborder : subOrders
+             ) {
+            sumOrder += suborder.getSumSubOrder();
+        }
     }
 
     public void setOpened(boolean opened) {
@@ -36,11 +50,11 @@ public class Order implements Serializable{
         this.shopName = shopName;
     }
 
-    public BigDecimal getSumOrder() {
+    public Integer getSumOrder() {
         return sumOrder;
     }
 
-    public void setSumOrder(BigDecimal sumOrder) {
+    public void setSumOrder(Integer sumOrder) {
         this.sumOrder = sumOrder;
     }
 
@@ -88,5 +102,6 @@ public class Order implements Serializable{
 
     public void addSubOrder(SubOrder subOrder) {
         subOrders.add(subOrder);
+        sumOrder += subOrder.getSumSubOrder();
     }
 }

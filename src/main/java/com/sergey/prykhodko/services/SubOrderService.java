@@ -7,6 +7,8 @@ import com.sergey.prykhodko.model.order.suborder.Link;
 import com.sergey.prykhodko.model.order.suborder.SubOrder;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
+import java.util.List;
+
 public class SubOrderService {
     private SubOrderDAO subOrderDAO;
 
@@ -27,5 +29,9 @@ public class SubOrderService {
             link.setSubOrderId(id);
             linkService.saveLink(link);
         }
+    }
+
+    public List<SubOrder> getSubOrdersByOrderId(Integer orderId) {
+        return subOrderDAO.getSubOrdersByOrderId(orderId);
     }
 }

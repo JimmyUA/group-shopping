@@ -5,6 +5,8 @@ import com.sergey.prykhodko.dao.factory.FactoryDAO;
 import com.sergey.prykhodko.dao.factory.FactoryType;
 import com.sergey.prykhodko.model.order.suborder.Link;
 
+import java.util.List;
+
 public class LinkService {
     private LinkDAO linkDAO;
 
@@ -19,5 +21,9 @@ public class LinkService {
 
     public void saveLink(Link link) {
         linkDAO.add(link);
+    }
+
+    public List<Link> getLinksBySubOrderId(Integer subOrderId) {
+        return linkDAO.getLinksBySubOrderId(subOrderId);
     }
 }

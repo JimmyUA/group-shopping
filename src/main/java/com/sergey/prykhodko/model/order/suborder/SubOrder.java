@@ -58,7 +58,12 @@ public class SubOrder implements Serializable {
     }
 
     public void setLinks(List<Link> links) {
+
         this.links = links;
+        for (Link link : links
+             ) {
+            sumSubOrder += link.getItemPrice() * link.getItemAmount();
+        }
     }
 
     public Integer getSumSubOrder() {
@@ -109,6 +114,6 @@ public class SubOrder implements Serializable {
 
     public void addLink(Link link) {
         links.add(link);
-        sumSubOrder += link.getItemPrice();
+        sumSubOrder += link.getItemPrice() * link.getItemAmount();
     }
 }

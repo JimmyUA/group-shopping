@@ -4,6 +4,9 @@ import com.sergey.prykhodko.dao.OrderDAO;
 import com.sergey.prykhodko.dao.factory.FactoryDAO;
 import com.sergey.prykhodko.dao.factory.FactoryType;
 import com.sergey.prykhodko.model.order.Order;
+import com.sergey.prykhodko.model.order.suborder.Link;
+import com.sergey.prykhodko.model.order.suborder.SubOrder;
+import com.sun.org.apache.xpath.internal.operations.Or;
 
 import java.util.List;
 
@@ -19,7 +22,23 @@ public class OrderService {
     }
 
     public List<Order> getActiveOrders() {
-        return orderDAO.getActiveOrders();
+        List<Order> activeOrders = orderDAO.getActiveOrders();
+        SubOrderService subOrderService = SubOrderService.getSubOrderService(FactoryType.SPRING);
+        LinkService linkService = LinkService.getLinkService(FactoryType.SPRING);
+        for (Order order : activeOrders
+             ) {
+            List<SubOrder> subOrders = subOrderService.getSubOrdersByOrderId(order.getOrderId());
+            for (SubOrder subOrder : subOrders
+                 ) {
+                List<Link> links = linkService.getLinksBySubOrderId(subOrder.getId());
+            }
+
+            order.setSubOrders(subOrders);
+        }
+        return activeOrders;
     }
 
+    public void updateOrder(Order order) {
+        orderDAO.update(order);
+    }
 }
