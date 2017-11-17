@@ -1,14 +1,14 @@
 package com.sergey.prykhodko.model.order.suborder;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.math.BigInteger;
+
 
 public class Link implements Serializable{
     private Integer id;
     private String linkString;
-    private int itemAmount;
-    private BigInteger itemPrice; // all in 0.01 grn
+    private Integer itemAmount;
+    private Integer subOrderId;
+    private Integer itemPrice; // all in 0.01 grn
 
     public Link() {
     }
@@ -37,12 +37,24 @@ public class Link implements Serializable{
         this.itemAmount = itemAmount;
     }
 
-    public BigInteger getItemPrice() {
+    public Integer getItemPrice() {
         return itemPrice;
     }
 
-    public void setItemPrice(BigInteger itemPrice) {
+    public void setItemPrice(Integer itemPrice) {
         this.itemPrice = itemPrice;
+    }
+
+    public void setItemAmount(Integer itemAmount) {
+        this.itemAmount = itemAmount;
+    }
+
+    public Integer getSubOrderId() {
+        return subOrderId;
+    }
+
+    public void setSubOrderId(Integer subOrderId) {
+        this.subOrderId = subOrderId;
     }
 
     @Override
@@ -52,15 +64,19 @@ public class Link implements Serializable{
 
         Link link = (Link) o;
 
-        if (itemAmount != link.itemAmount) return false;
+        if (!id.equals(link.id)) return false;
         if (!linkString.equals(link.linkString)) return false;
+        if (!itemAmount.equals(link.itemAmount)) return false;
+        if (!subOrderId.equals(link.subOrderId)) return false;
         return itemPrice.equals(link.itemPrice);
     }
 
     @Override
     public int hashCode() {
-        int result = linkString.hashCode();
-        result = 31 * result + itemAmount;
+        int result = id.hashCode();
+        result = 31 * result + linkString.hashCode();
+        result = 31 * result + itemAmount.hashCode();
+        result = 31 * result + subOrderId.hashCode();
         result = 31 * result + itemPrice.hashCode();
         return result;
     }
@@ -68,8 +84,10 @@ public class Link implements Serializable{
     @Override
     public String toString() {
         return "Link{" +
-                "linkString='" + linkString + '\'' +
+                "id=" + id +
+                ", linkString='" + linkString + '\'' +
                 ", itemAmount=" + itemAmount +
+                ", subOrderId=" + subOrderId +
                 ", itemPrice=" + itemPrice +
                 '}';
     }

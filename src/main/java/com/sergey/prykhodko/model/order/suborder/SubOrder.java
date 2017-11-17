@@ -2,22 +2,32 @@ package com.sergey.prykhodko.model.order.suborder;
 
 import com.sergey.prykhodko.model.user.User;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SubOrder {
+public class SubOrder implements Serializable {
     private Integer id;
-    private User owner;
+    private Integer orderId;
+    private Integer ownerId;
     private List<Link> links;
-    private boolean isPaid;
-    private BigInteger sumSubOrder;  // All money in 0.01 of grn
+    private boolean isPaid = false;
+    private Integer sumSubOrder = 0;  // All money in 0.01 of grn
 
     public SubOrder() {
         links = new ArrayList<>();
     }
 
+
+    public Integer getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
+    }
 
     public Integer getId() {
         return id;
@@ -35,12 +45,12 @@ public class SubOrder {
         isPaid = paid;
     }
 
-    public User getOwner() {
-        return owner;
+    public Integer getOwnerId() {
+        return ownerId;
     }
 
-    public void setOwner(User owner) {
-        this.owner = owner;
+    public void setOwnerId(Integer ownerId) {
+        this.ownerId = ownerId;
     }
 
     public List<Link> getLinks() {
@@ -51,11 +61,11 @@ public class SubOrder {
         this.links = links;
     }
 
-    public BigInteger getSumSubOrder() {
+    public Integer getSumSubOrder() {
         return sumSubOrder;
     }
 
-    public void setSumSubOrder(BigInteger sumSubOrder) {
+    public void setSumSubOrder(Integer sumSubOrder) {
         this.sumSubOrder = sumSubOrder;
     }
 
@@ -67,16 +77,18 @@ public class SubOrder {
         SubOrder subOrder = (SubOrder) o;
 
         if (isPaid != subOrder.isPaid) return false;
-        if (id != null ? !id.equals(subOrder.id) : subOrder.id != null) return false;
-        if (!owner.equals(subOrder.owner)) return false;
+        if (!id.equals(subOrder.id)) return false;
+        if (!orderId.equals(subOrder.orderId)) return false;
+        if (!ownerId.equals(subOrder.ownerId)) return false;
         if (!links.equals(subOrder.links)) return false;
         return sumSubOrder.equals(subOrder.sumSubOrder);
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + owner.hashCode();
+        int result = id.hashCode();
+        result = 31 * result + orderId.hashCode();
+        result = 31 * result + ownerId.hashCode();
         result = 31 * result + links.hashCode();
         result = 31 * result + (isPaid ? 1 : 0);
         result = 31 * result + sumSubOrder.hashCode();
@@ -87,7 +99,8 @@ public class SubOrder {
     public String toString() {
         return "SubOrder{" +
                 "id=" + id +
-                ", owner=" + owner +
+                ", orderId=" + orderId +
+                ", ownerId=" + ownerId +
                 ", links=" + links +
                 ", isPaid=" + isPaid +
                 ", sumSubOrder=" + sumSubOrder +
@@ -96,5 +109,6 @@ public class SubOrder {
 
     public void addLink(Link link) {
         links.add(link);
+        sumSubOrder += link.getItemPrice();
     }
 }
