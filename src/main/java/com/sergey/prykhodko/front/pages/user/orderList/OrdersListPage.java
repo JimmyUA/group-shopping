@@ -34,7 +34,7 @@ public class OrdersListPage extends BasePage {
         DataView<Order> dataView = new DataView<Order>("orderView", listDataProvider) {
             @Override
             protected void populateItem(Item<Order> item) {
-                item.add(new Label("id", item.getModelObject().getOrderId()));
+                item.add(new Label("id", "Заказ # " + item.getModelObject().getOrderId()));
                 item.add(new Label("shopName", item.getModelObject().getShopName()));
                 item.add(new ExternalLink("shopLink", new Model<>(item.getModelObject().getShopName().getLink()),
                         new Model<>("Ссылка на магазин")){
@@ -52,7 +52,7 @@ public class OrdersListPage extends BasePage {
                         setResponsePage(new SubOrderAddingPage(item.getModelObject()));
                     }
                 };
-                ContextImage shopImage = new ContextImage("img", "/drawable/sd.jpg");
+                ContextImage shopImage = new ContextImage("img", item.getModelObject().getShopName().getLogoPath());
                 imageLink.add(shopImage);
                 item.add(imageLink);
             }

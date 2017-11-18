@@ -10,6 +10,11 @@ public enum ShopName {
 
     private  String value;
     private  String link;
+    private final String logoPath = "/drawable/sd.jpg";
+
+    public String getLogoPath() {
+        return logoPath;
+    }
 
     public String getValue() {
         return value;
