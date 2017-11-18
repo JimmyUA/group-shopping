@@ -1,7 +1,7 @@
 package com.sergey.prykhodko.front.util;
 
 public enum ShopName {
-    SPORT_DIRECT("Sport Direct", ".sportsdirect.com");
+    SPORT_DIRECT("Sport Direct", "http://sportsdirect.com");
 
     ShopName(String value, String link) {
         this.value = value;
