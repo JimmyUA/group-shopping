@@ -69,6 +69,7 @@ public class MenuPanel extends Panel {
             protected void onUpdate(AjaxRequestTarget target) {
                 selected = currencyChoice.getModelObject();
                 getSession().setAttribute(selected, "currency");
+                logger.info("currency " + selected + " is set to session!" + " session id: " + getSession().getId());
                 target.add(getPage());
                 target.add(getParent());
                 send(getPage(), Broadcast.BREADTH, new PageRerenderEvent());

@@ -69,6 +69,7 @@ public class UserCabinet extends BasePage {
 
             private String getCurrencyValue() {
                 final String currency = (String) getSession().getAttribute("currency");
+                logger.info("currency stored in session " + currency + " session id " + getSession().getId());
                 return currency == null ? "(UA) Гривны" : currency;
             }
         };
