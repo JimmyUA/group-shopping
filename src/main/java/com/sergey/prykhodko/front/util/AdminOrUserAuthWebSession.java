@@ -8,7 +8,9 @@ import org.apache.wicket.authroles.authorization.strategies.role.Roles;
 import org.apache.wicket.request.Request;
 import org.apache.wicket.request.cycle.RequestCycle;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AdminOrUserAuthWebSession extends AuthenticatedWebSession {
 
@@ -18,6 +20,11 @@ public class AdminOrUserAuthWebSession extends AuthenticatedWebSession {
 
     public AdminOrUserAuthWebSession(Request request) {
         super(request);
+    }
+
+
+    @Override
+    public void replaceSession() {
     }
 
     protected boolean authenticate(String login, String password) {
@@ -57,4 +64,5 @@ public class AdminOrUserAuthWebSession extends AuthenticatedWebSession {
         }
         return null;
     }
+
 }

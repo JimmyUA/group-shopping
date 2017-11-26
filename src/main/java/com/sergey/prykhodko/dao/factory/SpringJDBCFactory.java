@@ -1,13 +1,7 @@
 package com.sergey.prykhodko.dao.factory;
 
-import com.sergey.prykhodko.dao.LinkDAO;
-import com.sergey.prykhodko.dao.OrderDAO;
-import com.sergey.prykhodko.dao.SubOrderDAO;
-import com.sergey.prykhodko.dao.UserDAO;
-import com.sergey.prykhodko.dao.implementations.LinkMySQLDAO;
-import com.sergey.prykhodko.dao.implementations.OrderMySQLDAO;
-import com.sergey.prykhodko.dao.implementations.SubOrderMySQLDAO;
-import com.sergey.prykhodko.dao.implementations.UserMySQLDAO;
+import com.sergey.prykhodko.dao.*;
+import com.sergey.prykhodko.dao.implementations.*;
 
 public class SpringJDBCFactory implements FactoryDAO {
     @Override
@@ -28,5 +22,10 @@ public class SpringJDBCFactory implements FactoryDAO {
     @Override
     public SubOrderDAO getSubOrderDAO() {
         return new SubOrderMySQLDAO();
+    }
+
+    @Override
+    public ShopDAO getShopDAO() {
+        return new ShopMySQLDAO();
     }
 }

@@ -11,6 +11,7 @@ import com.sergey.prykhodko.services.UserService;
 import com.sergey.prykhodko.util.ClassName;
 import com.sergey.prykhodko.util.currency.MoneyConverter;
 import org.apache.log4j.Logger;
+import org.apache.wicket.Session;
 import org.apache.wicket.event.IEvent;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
@@ -30,6 +31,7 @@ public class UserCabinet extends BasePage {
 
     private final String ACTIVE_ORDERS_LABEL_MESSAGE = "Активные заказы";
 
+    private String currency;
     private User user;
 
 
@@ -64,12 +66,13 @@ public class UserCabinet extends BasePage {
                 item.add(new Label("orderSum",
                         new MoneyConverter(UserCabinet.this).convertFromUAHtoTarget(item.getModelObject().getSumOrder(),
                                 getCurrencyValue())/100.0 + getCurrencyLabel()));
-                logger.info("current currency: " + getCurrencyValue());
+                logger.info("current currency: " + currency);
             }
 
             private String getCurrencyValue() {
-                final String currency = (String) getSession().getAttribute("currency");
-                logger.info("currency stored in session " + currency + " session id " + getSession().getId());
+                final Session session = getSession();
+                currency = (String) session.getAttribute("currency");
+                logger.info("currency stored in session " + currency + " session id " + session.getId());
                 return currency == null ? "(UA) Гривны" : currency;
             }
         };

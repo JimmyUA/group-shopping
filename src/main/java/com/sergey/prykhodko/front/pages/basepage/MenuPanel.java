@@ -6,6 +6,7 @@ import com.sergey.prykhodko.util.ClassName;
 import com.sergey.prykhodko.util.currency.CurrencyConversionResponse;
 import com.sergey.prykhodko.util.currency.CurrencyExchangeRatesGetter;
 import org.apache.log4j.Logger;
+import org.apache.wicket.Session;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
@@ -68,12 +69,13 @@ public class MenuPanel extends Panel {
             @Override
             protected void onUpdate(AjaxRequestTarget target) {
                 selected = currencyChoice.getModelObject();
-                getSession().setAttribute(selected, "currency");
-                logger.info("currency " + selected + " is set to session!" + " session id: " + getSession().getId());
+                final Session session = getSession();
+                session.setAttribute("currency", selected);
+                logger.info("currency " + selected + " is set to session!" + " session id: " + session.getId());
                 target.add(getPage());
                 target.add(getParent());
-                send(getPage(), Broadcast.BREADTH, new PageRerenderEvent());
-                logger.info("PageRerender event is sent");
+//                send(getPage(), Broadcast.BREADTH, new PageRerenderEvent());
+//                logger.info("PageRerender event is sent");
                 getExchangeRates();
             }
         });
