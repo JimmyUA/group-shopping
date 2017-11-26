@@ -15,7 +15,7 @@ public class SubOrderAddingPage extends BasePage {
     @Override
     protected void onInitialize() {
         super.onInitialize();
-        String orderLabelMessage = "Заказ # " + order.getOrderId() + " " + order.getShopName().getValue();
+        String orderLabelMessage = "Заказ # " + order.getOrderId() + " " + order.getShopName().getName();
         String currentLabelMessage = "текущая сумма: " + order.getSumOrder() + " гривен";
         add(new Label("orderLabel", orderLabelMessage));
         add(new Label("currentSumLabel", currentLabelMessage));

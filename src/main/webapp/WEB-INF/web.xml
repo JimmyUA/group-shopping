@@ -12,7 +12,7 @@
 	      1) A system property: -Dwicket.configuration
 	      2) servlet specific <init-param>
 	      3) context specific <context-param>
-	      The value might be either "development" (reloading when templates change)
+	      The name might be either "development" (reloading when templates change)
 	      or "deployment". If no configuration is found, "development" is the default.
 	-->
 
@@ -21,7 +21,7 @@
  		<filter-class>org.apache.wicket.protocol.http.WicketFilter</filter-class>
 		<init-param>
 			<param-name>applicationClassName</param-name>
-			<param-value>com.sergey.prykhodko.WicketApplication</param-value>
+			<param-name>com.sergey.prykhodko.WicketApplication</param-name>
  		</init-param>
  	</filter>
 

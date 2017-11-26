@@ -1,10 +1,9 @@
 package com.sergey.prykhodko.model.order;
 
-import com.sergey.prykhodko.front.util.ShopName;
+import com.sergey.prykhodko.model.ShopName;
 import com.sergey.prykhodko.model.order.suborder.SubOrder;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

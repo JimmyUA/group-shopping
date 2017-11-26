@@ -41,4 +41,9 @@ public class OrderService {
     public void updateOrder(Order order) {
         orderDAO.update(order);
     }
+
+
+    public Order getActiveOrdersByShop(Integer id) {
+        return orderDAO.getActiveOrderByID(id);
+    }
 }

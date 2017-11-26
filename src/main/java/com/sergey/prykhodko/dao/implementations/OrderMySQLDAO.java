@@ -1,7 +1,7 @@
 package com.sergey.prykhodko.dao.implementations;
 
 import com.sergey.prykhodko.dao.OrderDAO;
-import com.sergey.prykhodko.front.util.ShopName;
+import com.sergey.prykhodko.model.ShopName;
 import com.sergey.prykhodko.model.order.Order;
 import com.sergey.prykhodko.util.ClassName;
 import com.sergey.prykhodko.util.DataSources;
@@ -13,11 +13,10 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import javax.sql.DataSource;
-import java.math.BigDecimal;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.time.ZoneId;
 import java.util.List;
+
+import static com.sergey.prykhodko.util.queries.SQLOrderCommands.GET_ACTIVE_ORDER_BY_ID;
 
 
 public class OrderMySQLDAO implements OrderDAO {
@@ -85,4 +84,10 @@ public class OrderMySQLDAO implements OrderDAO {
 
         jdbcTemplate.update(SQLOrderCommands.UPDATE, setter);
     }
+
+    @Override
+    public Order getActiveOrderByID(Integer id) {
+        return jdbcTemplate.queryForObject(GET_ACTIVE_ORDER_BY_ID, rowMapper, id);
+    }
+
 }
