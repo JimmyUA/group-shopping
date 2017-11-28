@@ -21,8 +21,8 @@
  		<filter-class>org.apache.wicket.protocol.http.WicketFilter</filter-class>
 		<init-param>
 			<param-name>applicationClassName</param-name>
-			<param-name>com.sergey.prykhodko.WicketApplication</param-name>
- 		</init-param>
+			<param-value>com.sergey.prykhodko.WicketApplication</param-value>
+		</init-param>
  	</filter>
 
  <filter-mapping>
