@@ -7,6 +7,7 @@ import com.sergey.prykhodko.util.ClassName;
 import com.sergey.prykhodko.util.DataSources;
 import com.sergey.prykhodko.util.queries.SQLOrderCommands;
 import org.apache.log4j.Logger;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
@@ -87,7 +88,11 @@ public class OrderMySQLDAO implements OrderDAO {
 
     @Override
     public Order getActiveOrderByID(Integer id) {
-        return jdbcTemplate.queryForObject(GET_ACTIVE_ORDER_BY_ID, rowMapper, id);
+        try {
+            return jdbcTemplate.queryForObject(GET_ACTIVE_ORDER_BY_ID, rowMapper, id);
+        } catch (EmptyResultDataAccessException e){
+            return null;
+        }
     }
 
 }

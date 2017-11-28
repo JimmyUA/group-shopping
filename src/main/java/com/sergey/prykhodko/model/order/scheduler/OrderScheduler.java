@@ -1,6 +1,8 @@
 package com.sergey.prykhodko.model.order.scheduler;
 
+import com.sergey.prykhodko.dao.factory.FactoryType;
 import com.sergey.prykhodko.model.order.Order;
+import com.sergey.prykhodko.services.OrderService;
 import com.sergey.prykhodko.util.ClassName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,6 +62,8 @@ public class OrderScheduler implements Serializable{
                 if (order.isStarted()) {
                     if (twoDaysFromStart()) {
                         order.stop();
+                        updateOrder(order);
+                        setNewOrder(order);
                     }
                 } else {
                     if (isNewDay()) {
@@ -68,6 +72,15 @@ public class OrderScheduler implements Serializable{
                 }
             }
         }
+
+        private void setNewOrder(Order order) {
+            setOrder(new Order(order.getShopName()));
+        }
+
+        private void updateOrder(Order order) {
+            OrderService.getOrderService(FactoryType.SPRING).updateOrder(order);
+        }
+
         public void setCurrent(LocalDate current) {
             this.current = current;
         }
