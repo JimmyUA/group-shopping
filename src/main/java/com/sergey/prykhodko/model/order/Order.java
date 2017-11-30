@@ -16,6 +16,7 @@ public class Order implements Serializable{
     private LocalDate startDate;
     private ShopName shopName;
     private List<SubOrder> subOrders;
+    private boolean isPaid = false;
     private Integer sumOrder = 0;  // All money in 0.01 of grn
 
 
@@ -35,6 +36,16 @@ public class Order implements Serializable{
              ) {
             sumOrder += suborder.getSumSubOrder();
         }
+    }
+
+    public boolean checkIfPaid(){
+        for (SubOrder subOrder : subOrders
+             ) {
+            if (!subOrder.isPaid()){
+                return false;
+            }
+        }
+        return true;
     }
 
     public void setOpened(boolean opened) {
