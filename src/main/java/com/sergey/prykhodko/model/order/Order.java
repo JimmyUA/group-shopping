@@ -103,4 +103,45 @@ public class Order implements Serializable{
         subOrders.add(subOrder);
         sumOrder += subOrder.getSumSubOrder();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Order order = (Order) o;
+
+        if (isOpened != order.isOpened) return false;
+        if (isStarted != order.isStarted) return false;
+        if (orderId != null ? !orderId.equals(order.orderId) : order.orderId != null) return false;
+        if (startDate != null ? !startDate.equals(order.startDate) : order.startDate != null) return false;
+        if (shopName != order.shopName) return false;
+        if (subOrders != null ? !subOrders.equals(order.subOrders) : order.subOrders != null) return false;
+        return sumOrder != null ? sumOrder.equals(order.sumOrder) : order.sumOrder == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = orderId != null ? orderId.hashCode() : 0;
+        result = 31 * result + (isOpened ? 1 : 0);
+        result = 31 * result + (isStarted ? 1 : 0);
+        result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
+        result = 31 * result + (shopName != null ? shopName.hashCode() : 0);
+        result = 31 * result + (subOrders != null ? subOrders.hashCode() : 0);
+        result = 31 * result + (sumOrder != null ? sumOrder.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderId=" + orderId +
+                ", isOpened=" + isOpened +
+                ", isStarted=" + isStarted +
+                ", startDate=" + startDate +
+                ", shopName=" + shopName +
+                ", subOrders=" + subOrders +
+                ", sumOrder=" + sumOrder +
+                '}';
+    }
 }

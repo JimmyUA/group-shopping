@@ -6,18 +6,23 @@ import com.sergey.prykhodko.model.order.Order;
 import com.sergey.prykhodko.model.order.scheduler.OrderScheduler;
 import com.sergey.prykhodko.services.OrderService;
 import com.sergey.prykhodko.services.ShopService;
+import com.sergey.prykhodko.util.ClassName;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.WebResourceRoot;
 import org.apache.catalina.core.StandardContext;
 import org.apache.catalina.startup.Tomcat;
 import org.apache.catalina.webresources.DirResourceSet;
 import org.apache.catalina.webresources.StandardRoot;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import java.io.File;
 import java.util.List;
 
 public class Main {
+
+    private final static Logger logger = Logger.getLogger(ClassName.getCurrentClassName());
+
     public static void main(String[] args) throws ServletException, LifecycleException {
         Tomcat tomcat = getTomcat();
 
@@ -63,6 +68,7 @@ public class Main {
 
             if (order == null){
                 order = new Order(shop);
+                logger.info("new order " + order + " is started");
             }
             OrderScheduler scheduler = new OrderScheduler();
             scheduler.addOrder(order);

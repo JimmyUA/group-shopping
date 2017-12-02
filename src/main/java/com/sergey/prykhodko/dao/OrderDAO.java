@@ -10,5 +10,9 @@ public interface OrderDAO {
     void update(Order order);
 
     Order getActiveOrderByID(Integer id);
+
+    void add(Order order);
+
+    Integer getLastId();
 }
 

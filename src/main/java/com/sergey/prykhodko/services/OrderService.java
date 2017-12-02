@@ -46,4 +46,10 @@ public class OrderService {
     public Order getActiveOrdersByShop(Integer id) {
         return orderDAO.getActiveOrderByID(id);
     }
+
+    public void add(Order order) {
+        orderDAO.add(order); // TODO do in one transaction
+        Integer id = orderDAO.getLastId();
+        order.setOrderId(id);
+    }
 }

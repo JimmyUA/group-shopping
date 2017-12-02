@@ -14,10 +14,12 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import javax.sql.DataSource;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
 import static com.sergey.prykhodko.util.queries.SQLOrderCommands.GET_ACTIVE_ORDER_BY_ID;
+import static com.sergey.prykhodko.util.queries.SQLOrderCommands.GET_LAST_ID;
 
 
 public class OrderMySQLDAO implements OrderDAO {
@@ -93,6 +95,27 @@ public class OrderMySQLDAO implements OrderDAO {
         } catch (EmptyResultDataAccessException e){
             return null;
         }
+    }
+
+    @Override
+    public void add(Order order) {
+        PreparedStatementSetter setter = ps -> {
+            int i = 1;
+            ps.setBoolean(i++, order.isOpened());
+            ps.setBoolean(i++, order.isStarted());
+            ps.setDate(i++, Date.valueOf(order.getStartDate()));
+            ps.setInt(i++, order.getShopName().getId());
+            ps.setInt(i, order.getSumOrder());
+        };
+
+        jdbcTemplate.update(SQLOrderCommands.ADD, setter);
+    }
+
+    @Override
+    public Integer getLastId() {
+        final Integer id = jdbcTemplate.queryForObject(GET_LAST_ID, Integer.class);
+        System.out.println(id);
+        return id;
     }
 
 }

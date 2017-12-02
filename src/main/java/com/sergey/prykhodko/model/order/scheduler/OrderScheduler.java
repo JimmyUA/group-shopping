@@ -66,11 +66,17 @@ public class OrderScheduler implements Serializable{
                         setNewOrder(order);
                     }
                 } else {
-                    if (isNewDay()) {
                         order.start(current);
-                    }
+
+                        storeToDB();
+                        LOGER.info("Order " + order + " is stored to DB\nSet ID " + order.getOrderId());
                 }
             }
+        }
+
+
+        private void storeToDB() {
+            OrderService.getOrderService(FactoryType.SPRING).add(order);
         }
 
         private void setNewOrder(Order order) {
