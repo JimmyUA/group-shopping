@@ -32,6 +32,12 @@ public class SubOrderService {
     }
 
     public List<SubOrder> getSubOrdersByOrderId(Integer orderId) {
-        return subOrderDAO.getSubOrdersByOrderId(orderId);
+        List<SubOrder> subOrders = subOrderDAO.getSubOrdersByOrderId(orderId);
+        LinkService linkService = LinkService.getLinkService(FactoryType.SPRING);
+        for (SubOrder subOrder : subOrders
+                ) {
+            List<Link> links = linkService.getLinksBySubOrderId(subOrder.getId());
+        }
+        return subOrders;
     }
 }

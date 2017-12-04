@@ -39,6 +39,9 @@ public class MoneyConverter {
     }
 
     public Integer convertToUAH(Integer sum, String currentCurrency){
+        if (currentCurrency == null){
+            currentCurrency = "(UAH) Гривны";
+        }
         switch (currentCurrency){
             case "(UAH) Гривны":
                 return sum;

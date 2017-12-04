@@ -82,7 +82,8 @@ public class OrderMySQLDAO implements OrderDAO {
             int i = 1;
             ps.setBoolean(i++, order.isOpened());
             ps.setBoolean(i++, order.isStarted());
-            ps.setInt(i, order.getSumOrder());
+            ps.setInt(i++, order.getSumOrder());
+            ps.setInt(i, order.getOrderId());
         };
 
         jdbcTemplate.update(SQLOrderCommands.UPDATE, setter);

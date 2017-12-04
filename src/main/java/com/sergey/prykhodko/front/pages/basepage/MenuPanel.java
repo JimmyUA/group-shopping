@@ -1,7 +1,7 @@
 package com.sergey.prykhodko.front.pages.basepage;
 
 import com.sergey.prykhodko.front.pages.user.orderList.OrdersListPage;
-import com.sergey.prykhodko.front.util.events.PageRerenderEvent;
+import com.sergey.prykhodko.front.util.events.CurrencyChangedEvent;
 import com.sergey.prykhodko.util.ClassName;
 import com.sergey.prykhodko.util.currency.CurrencyConversionResponse;
 import com.sergey.prykhodko.util.currency.CurrencyExchangeRatesGetter;
@@ -11,7 +11,6 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.event.Broadcast;
-import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -74,8 +73,8 @@ public class MenuPanel extends Panel {
                 logger.info("currency " + selected + " is set to session!" + " session id: " + session.getId());
                 target.add(getPage());
                 target.add(getParent());
-//                send(getPage(), Broadcast.BREADTH, new PageRerenderEvent());
-//                logger.info("PageRerender event is sent");
+                send(getPage(), Broadcast.BREADTH, new CurrencyChangedEvent());
+                logger.info("Currency Changed event is sent");
                 getExchangeRates();
             }
         });

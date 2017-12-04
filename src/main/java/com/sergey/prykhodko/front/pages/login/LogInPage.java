@@ -2,7 +2,7 @@ package com.sergey.prykhodko.front.pages.login;
 
 import com.sergey.prykhodko.front.pages.basepage.BasePage;
 import com.sergey.prykhodko.front.pages.home.HomePage;
-import com.sergey.prykhodko.front.pages.user.cabinet.UserCabinet;
+import com.sergey.prykhodko.front.pages.user.cabinet.UserCabinetPage;
 import com.sergey.prykhodko.front.pages.user.registration.RegistrationPage;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;
@@ -56,7 +56,7 @@ public class LogInPage extends BasePage {
                     AuthenticatedWebSession session = (AuthenticatedWebSession) getSession();
                     Roles role = session.getRoles();
                     if (role.equals(new Roles(Roles.USER))){
-                        setResponsePage(UserCabinet.class);
+                        setResponsePage(UserCabinetPage.class);
                     } else {
                         setResponsePage(HomePage.class);
                     }

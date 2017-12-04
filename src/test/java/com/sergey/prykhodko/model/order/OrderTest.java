@@ -25,21 +25,4 @@ public class OrderTest {
         assertEquals(expectedSum, order.getSumOrder());
     }
 
-    @Test
-    public void calculateSumCorrectlyWhenSettingListSuborders() throws Exception {
-        Order order = new Order();
-        Integer expectedSum = 200;
-
-        SubOrder subOrder1 = new SubOrder();
-        SubOrder subOrder2 = new SubOrder();
-        subOrder1.setSumSubOrder(100);
-        subOrder2.setSumSubOrder(100);
-
-        List<SubOrder> subOrderList = Arrays.asList(subOrder1, subOrder2);
-
-        order.setSubOrders(subOrderList);
-
-        assertEquals(expectedSum, order.getSumOrder());
-
-    }
 }

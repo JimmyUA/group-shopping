@@ -32,10 +32,6 @@ public class Order implements Serializable{
     public void setSubOrders(List<SubOrder> subOrders) {
 
         this.subOrders = subOrders;
-        for (SubOrder suborder : subOrders
-             ) {
-            sumOrder += suborder.getSumSubOrder();
-        }
     }
 
     public boolean checkIfPaid(){
