@@ -37,6 +37,7 @@ public class SubOrderService {
         for (SubOrder subOrder : subOrders
                 ) {
             List<Link> links = linkService.getLinksBySubOrderId(subOrder.getId());
+            subOrder.setLinks(links);
         }
         return subOrders;
     }

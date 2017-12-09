@@ -71,19 +71,25 @@ public class UserCabinetPage extends BasePage {
 
                 addShopImage(item);
 
-                if (openedSuborder != null){
-                    addOpenedSubOrderLabel(openedSuborder, item);
-                }
+                addOpenedSubOrderLabel(openedSuborder, item);
+
+
 
                 addSumMessage(item);
                 logger.info("current currency: " + currency);
             }
 
             private void addOpenedSubOrderLabel(SubOrder openedSuborder, Item<Order> item) {
-                String openedSuborderNotice = "У Вас есть открытый подзаказ #" + openedSuborder.getId() + " на сумму " +
-                        new MoneyConverter(UserCabinetPage.this)
-                        .convertFromUAHtoTarget(openedSuborder.getSumSubOrder(),
-                                getCurrencyValue()) / 100.0 + getCurrencyLabel() + " в текущем заказе";
+                String openedSuborderNotice;
+                if (openedSuborder == null){
+                    openedSuborderNotice = "У Вас нетоткрытых подзаказов!";
+                } else {
+                    openedSuborderNotice = "У Вас есть открытый подзаказ #" + openedSuborder.getId() + " на сумму " +
+                            new MoneyConverter(UserCabinetPage.this)
+                                    .convertFromUAHtoTarget(openedSuborder.getSumSubOrder(),
+                                            getCurrencyValue()) / 100.0 + getCurrencyLabel() + " в текущем заказе";
+                }
+
 
                 item.add(new Label("openedSuborder", openedSuborderNotice));
             }
@@ -102,9 +108,10 @@ public class UserCabinetPage extends BasePage {
 
 
             private void addSumMessage(Item<Order> item) {
+                final Integer sumOrder = item.getModelObject().getSumOrder();
                 String orderSumMessage = "Текущая сумма заказа - " +
                         new MoneyConverter(UserCabinetPage.this)
-                        .convertFromUAHtoTarget(item.getModelObject().getSumOrder(),
+                        .convertFromUAHtoTarget(sumOrder,
                         getCurrencyValue()) / 100.0 + getCurrencyLabel();
 
                 Label orderSumLabel = new Label("orderSum",

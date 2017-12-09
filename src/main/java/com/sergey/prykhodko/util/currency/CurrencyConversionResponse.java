@@ -18,7 +18,9 @@ public class CurrencyConversionResponse implements Serializable{
     }
 
     public void setResponseDate(LocalDate responseDate) {
-        this.responseDate = responseDate;
+        if (responseDate != null){
+            this.responseDate = responseDate;
+        }
     }
 
     public Map<String, String> getQuotes() {

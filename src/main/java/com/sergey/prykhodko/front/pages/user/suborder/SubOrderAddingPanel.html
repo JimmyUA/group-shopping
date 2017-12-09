@@ -1,5 +1,15 @@
+<br>
 <wicket:panel xmlns:wicket="http://www.w3.org/1999/xhtml">
-    <table class="table-bordered">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td><span>Link</span></td>
+            <td></td>
+            <td><span>Amount</span></td>
+            <td></td>
+            <td><span>Price</span></td>
+        </tr>
+        </thead>
         <tr wicket:id="linksDataView">
             <td><span wicket:id="link"></span></td>
             <td></td>
@@ -8,6 +18,7 @@
             <td><span wicket:id="sum"></span></td>
         </tr>
     </table>
+    <br>
 
     <form wicket:id="form">
         <input wicket:id="addSubOrderButton" type="submit" value="Добавить в заказ">

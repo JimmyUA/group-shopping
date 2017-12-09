@@ -8,7 +8,8 @@ import java.sql.SQLException;
 public enum DataSources {
     MY_SQL{
         private static final String DRIVER_URL = "com.mysql.jdbc.Driver";
-        private static final String DB_URL = "jdbc:mysql://localhost:3306/group_shopping";
+        private static final String DB_URL = "jdbc:mysql://5.189.140.129:3306/group_shopping" +
+                "?useUnicode=true&characterEncoding=UTF-8";
         private static final String USERNAME = "root";
         private static final String PASSWORD = "Vika_Ruban";
 

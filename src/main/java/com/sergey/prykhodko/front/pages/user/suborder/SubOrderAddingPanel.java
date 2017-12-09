@@ -156,7 +156,13 @@ public class SubOrderAddingPanel extends Panel {
             protected void populateItem(Item<Link> item) {
                 item.add(new Label("link", item.getModelObject().getLinkString()));
                 item.add(new Label("amount", item.getModelObject().getItemAmount()));
-                item.add(new Label("sum", item.getModelObject().getItemPrice()));
+                final Integer itemPrice = item.getModelObject().getItemPrice();
+                Double convertedPrice = getConvertedPrice(itemPrice);
+                item.add(new Label("sum", convertedPrice));
+            }
+
+            private double getConvertedPrice(Integer itemPrice) {
+                return new MoneyConverter((WebPage) getPage()).convertFromUAHtoTarget(itemPrice, getCurrencyValue())/100.0;
             }
         };
     }
