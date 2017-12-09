@@ -17,7 +17,6 @@ import org.apache.wicket.Session;
 import org.apache.wicket.event.IEvent;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.image.ContextImage;
-import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.markup.repeater.data.DataView;
@@ -30,34 +29,46 @@ public class UserCabinetPage extends BasePage {
 
     private final static Logger logger = Logger.getLogger(ClassName.getCurrentClassName());
 
-    private final String ACTIVE_ORDERS_LABEL_MESSAGE = "Активные заказы";
-
     private String currency;
     private User user;
-
-    private Label greetingLabel;
-    private Label activeOrdersLabel;
 
 
     @Override
     protected void onInitialize() {
         super.onInitialize();
         String login = getUserLoginFromSession();
-        user = UserService.getUserService(FactoryType.SPRING).getUserByLogin(login);
-        String greeting = "Приветствую, " + user.getName();
+        user = getUserByLogin(login);
+        addGreetingLabel();
+        addActiveOrdersLabel();
+        List<Order> activeOrders = getActiveOrders();
+        addActiveOrdersDataView(activeOrders);
+    }
 
-        greetingLabel = new Label("greeting", greeting);
-        add(greetingLabel);
-
-        activeOrdersLabel = new Label("activeOrders", ACTIVE_ORDERS_LABEL_MESSAGE);
-        add(activeOrdersLabel);
-
-        List<Order> activeOrders = OrderService.getOrderService(FactoryType.SPRING).getActiveOrders();
-
+    private void addActiveOrdersDataView(List<Order> activeOrders) {
         ListDataProvider<Order> activeOrdersProvider = new ListDataProvider<>(activeOrders);
 
         DataView<Order> activeOrdersDataView = getActiveOrdersDataView(activeOrdersProvider);
         add(activeOrdersDataView);
+    }
+
+    private List<Order> getActiveOrders() {
+        return OrderService.getOrderService(FactoryType.SPRING).getActiveOrders();
+    }
+
+    private void addActiveOrdersLabel() {
+        String ACTIVE_ORDERS_LABEL_MESSAGE = "Активные заказы";
+        Label activeOrdersLabel = new Label("activeOrders", ACTIVE_ORDERS_LABEL_MESSAGE);
+        add(activeOrdersLabel);
+    }
+
+    private void addGreetingLabel() {
+        String greeting = "Приветствую, " + user.getName();
+        Label greetingLabel = new Label("greeting", greeting);
+        add(greetingLabel);
+    }
+
+    private User getUserByLogin(String login) {
+        return UserService.getUserService(FactoryType.SPRING).getUserByLogin(login);
     }
 
     private DataView<Order> getActiveOrdersDataView(ListDataProvider<Order> activeOrdersProvider) {
@@ -168,16 +179,7 @@ public class UserCabinetPage extends BasePage {
             return " гривен";
         }
 
-        switch (currency){
-            case "(GBP) Фунты":
-                return " фунтов";
-            case "(USD) Доллары":
-                return " долларов";
-            case "(EUR) Евро":
-                return " евро";
-                default:
-                    return " гривен";
-        }
+       return MoneyConverter.choseCurrencyLabel(currency);
     }
 
     @Override

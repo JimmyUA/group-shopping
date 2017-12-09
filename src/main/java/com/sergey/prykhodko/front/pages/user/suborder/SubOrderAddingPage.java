@@ -69,16 +69,7 @@ public class SubOrderAddingPage extends BasePage {
             return " гривен";
         }
 
-        switch (currency){
-            case "(GBP) Фунты":
-                return " фунтов";
-            case "(USD) Доллары":
-                return " долларов";
-            case "(EUR) Евро":
-                return " евро";
-            default:
-                return " гривен";
-        } //TODO make a class for that purpose
+        return MoneyConverter.choseCurrencyLabel(currency);
     }
 
     @Override

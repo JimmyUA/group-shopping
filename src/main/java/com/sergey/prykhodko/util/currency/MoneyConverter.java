@@ -102,4 +102,17 @@ public class MoneyConverter {
         Double result = sumUSD * USDtoGBP;
         return result.intValue();
     }
+
+    public static String choseCurrencyLabel(String currency){
+        switch (currency){
+            case "(GBP) Фунты":
+                return " фунтов";
+            case "(USD) Доллары":
+                return " долларов";
+            case "(EUR) Евро":
+                return " евро";
+            default:
+                return " гривен";
+        }
+    }
 }
