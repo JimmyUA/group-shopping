@@ -18,6 +18,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
+import static com.sergey.prykhodko.util.queries.SQLOrderCommands.*;
 import static com.sergey.prykhodko.util.queries.SQLOrderCommands.GET_ACTIVE_ORDER_BY_ID;
 import static com.sergey.prykhodko.util.queries.SQLOrderCommands.GET_LAST_ID;
 
@@ -73,7 +74,7 @@ public class OrderMySQLDAO implements OrderDAO {
         PreparedStatementSetter setter = ps -> {
             ps.setBoolean(1, true);
         };
-        return jdbcTemplate.query(SQLOrderCommands.GET_ACTIVE_ORDERS, setter, rowMapper);
+        return jdbcTemplate.query(GET_ACTIVE_ORDERS, setter, rowMapper);
     }
 
     @Override
@@ -86,7 +87,7 @@ public class OrderMySQLDAO implements OrderDAO {
             ps.setInt(i, order.getOrderId());
         };
 
-        jdbcTemplate.update(SQLOrderCommands.UPDATE, setter);
+        jdbcTemplate.update(UPDATE, setter);
     }
 
     @Override
@@ -109,7 +110,7 @@ public class OrderMySQLDAO implements OrderDAO {
             ps.setInt(i, order.getSumOrder());
         };
 
-        jdbcTemplate.update(SQLOrderCommands.ADD, setter);
+        jdbcTemplate.update(ADD, setter);
     }
 
     @Override

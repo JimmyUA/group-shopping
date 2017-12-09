@@ -41,4 +41,15 @@ public class SubOrderService {
         }
         return subOrders;
     }
+
+    public void updateSubOrder(SubOrder subOrder) {
+        subOrderDAO.update(subOrder);
+        LinkService linkService = LinkService.getLinkService(FactoryType.SPRING);
+        for (Link link : subOrder.getLinks()
+             ) {
+            if (link.getId() == 0){
+                linkService.saveLink(link);
+            }
+        }
+    }
 }

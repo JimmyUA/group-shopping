@@ -11,4 +11,6 @@ public interface SubOrderDAO {
     Integer getLastId();
 
     List<SubOrder> getSubOrdersByOrderId(Integer orderId);
+
+    void update(SubOrder subOrder);
 }

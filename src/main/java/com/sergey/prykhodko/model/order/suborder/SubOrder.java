@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SubOrder implements Serializable {
-    private Integer id;
+    private Integer id = 0;
     private Integer orderId;
     private Integer ownerId;
     private List<Link> links;

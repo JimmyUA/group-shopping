@@ -26,6 +26,8 @@ import org.apache.wicket.markup.repeater.data.DataView;
 import org.apache.wicket.markup.repeater.data.ListDataProvider;
 import org.apache.wicket.model.Model;
 
+import java.util.List;
+
 
 public class SubOrderAddingPanel extends Panel {
 
@@ -54,7 +56,6 @@ public class SubOrderAddingPanel extends Panel {
         this.order = order;
         this.subOrder = subOrder;
     }
-
 
 
     public void setCurrency(String currency) {
@@ -103,11 +104,35 @@ public class SubOrderAddingPanel extends Panel {
             @Override
             public void onSubmit() {
                 super.onSubmit();
-                order.addSubOrder(subOrder);
-                SubOrderService.getSubOrderService(FactoryType.SPRING).addSubOrder(subOrder);
-                OrderService.getOrderService(FactoryType.SPRING).updateOrder(order);
+                final SubOrderService subOrderService = SubOrderService.getSubOrderService(FactoryType.SPRING);
+                final OrderService orderService = OrderService.getOrderService(FactoryType.SPRING);
+                if (orderContainsSubOrder(order, subOrder)) {
+                    updateOrderWithSubOrder(order, subOrder);
+                    subOrderService.updateSubOrder(subOrder);
+                    orderService.updateOrder(order);
+                } else {
+                    order.addSubOrder(subOrder);
+                    subOrderService.addSubOrder(subOrder);
+                    orderService.updateOrder(order);
+                }
             }
         };
+    }
+
+    private void updateOrderWithSubOrder(Order order, SubOrder subOrder) {
+        order.deleteSubOrder(subOrder);
+        order.addSubOrder(subOrder);
+    }
+
+    private boolean orderContainsSubOrder(Order order, SubOrder subOrder) {
+        List<SubOrder> subOrders = order.getSubOrders();
+        for (SubOrder listSubOrder : subOrders
+                ) {
+            if (listSubOrder.getId().equals(subOrder.getId())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private Button getAddLinkButton(TextField<String> linkTF, NumberTextField<Integer> amountTF, TextField<String> priceTF) {
@@ -162,7 +187,7 @@ public class SubOrderAddingPanel extends Panel {
             }
 
             private double getConvertedPrice(Integer itemPrice) {
-                return new MoneyConverter((WebPage) getPage()).convertFromUAHtoTarget(itemPrice, getCurrencyValue())/100.0;
+                return new MoneyConverter((WebPage) getPage()).convertFromUAHtoTarget(itemPrice, getCurrencyValue()) / 100.0;
             }
         };
     }
@@ -187,8 +212,8 @@ public class SubOrderAddingPanel extends Panel {
     @Override
     public void onEvent(IEvent<?> event) {
         super.onEvent(event);
-        if (event.getPayload() instanceof CurrencyChangedEvent){
-           currency = getCurrencyValue();
+        if (event.getPayload() instanceof CurrencyChangedEvent) {
+            currency = getCurrencyValue();
         }
     }
 }

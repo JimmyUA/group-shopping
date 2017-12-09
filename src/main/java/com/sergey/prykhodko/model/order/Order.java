@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Order implements Serializable{
 
-    private Integer orderId;
+    private Integer orderId = 0;
     private boolean isOpened = true;
     private boolean isStarted = false;
     private LocalDate startDate;
@@ -22,6 +22,16 @@ public class Order implements Serializable{
 
     public Order() {
         subOrders = new ArrayList<>();
+    }
+
+    public void deleteSubOrder(SubOrder subOrder){
+        for (SubOrder subOrderInOrder : subOrders
+             ) {
+            if (subOrderInOrder.getId().equals(subOrder.getId())){
+                subOrders.remove(subOrder);
+                sumOrder -= subOrder.getSumSubOrder();
+            }
+        }
     }
 
     public List<SubOrder> getSubOrders() {

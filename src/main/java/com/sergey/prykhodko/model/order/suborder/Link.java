@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 
 public class Link implements Serializable{
-    private Integer id;
+    private Integer id = 0;
     private String linkString;
     private Integer itemAmount;
     private Integer subOrderId;

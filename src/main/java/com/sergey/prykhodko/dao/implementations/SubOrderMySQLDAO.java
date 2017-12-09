@@ -5,6 +5,7 @@ import com.sergey.prykhodko.model.order.suborder.SubOrder;
 import com.sergey.prykhodko.util.ClassName;
 import com.sergey.prykhodko.util.DataSources;
 import com.sergey.prykhodko.util.queries.SQLOrderCommands;
+import com.sergey.prykhodko.util.queries.SQLSubOrderCommands;
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
@@ -69,6 +70,18 @@ public class SubOrderMySQLDAO implements SubOrderDAO {
             ps.setInt(1, orderId);
         };
         return jdbcTemplate.query(GET_SUBORDERS_BY_ORDER_ID, setter, rowMapper);
+    }
+
+    @Override
+    public void update(SubOrder subOrder) {
+        PreparedStatementSetter setter = ps -> {
+            int i = 1;
+            ps.setInt(i++, subOrder.getSumSubOrder());
+            ps.setBoolean(i++, subOrder.isPaid());
+            ps.setInt(i, subOrder.getId());
+        };
+
+        jdbcTemplate.update(SQLSubOrderCommands.UPDATE, setter);
     }
 
     private PreparedStatementSetter getAddPreparedStatementSetter(SubOrder subOrder) {
