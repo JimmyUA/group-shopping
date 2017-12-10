@@ -1,7 +1,7 @@
 package com.sergey.prykhodko.front.pages.user.registration;
 
 import com.sergey.prykhodko.front.pages.basepage.userbasepage.UserBasePage;
-import com.sergey.prykhodko.front.pages.user.cabinet.UserCabinetPageUser;
+import com.sergey.prykhodko.front.pages.user.cabinet.UserCabinetPage;
 import com.sergey.prykhodko.front.util.captcha.Captcha;
 import com.sergey.prykhodko.front.util.validators.EmailValidator;
 import com.sergey.prykhodko.front.util.validators.LoginUniquenessValidator;
@@ -20,7 +20,7 @@ import org.apache.wicket.util.value.ValueMap;
 
 import static com.sergey.prykhodko.dao.factory.FactoryType.SPRING;
 
-public class RegistrationPageUser extends UserBasePage {
+public class RegistrationPage extends UserBasePage {
 
     private static final String FORM = "registerForm";
     private static final String FEEDBACK = "feedback";
@@ -82,7 +82,7 @@ public class RegistrationPageUser extends UserBasePage {
                 user.setPassword(password);
                 UserService userService = UserService.getUserService(SPRING);
                 userService.addUserToDB(user);
-               setResponsePage(UserCabinetPageUser.class);
+               setResponsePage(UserCabinetPage.class);
              }
         };
 

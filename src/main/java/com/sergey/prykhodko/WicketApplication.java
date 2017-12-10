@@ -1,7 +1,7 @@
 package com.sergey.prykhodko;
 
-import com.sergey.prykhodko.front.pages.home.HomePageUser;
-import com.sergey.prykhodko.front.pages.login.LogInPageUser;
+import com.sergey.prykhodko.front.pages.home.HomePage;
+import com.sergey.prykhodko.front.pages.login.LogInPage;
 import com.sergey.prykhodko.front.util.AdminOrUserAuthWebSession;
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
@@ -18,7 +18,7 @@ public class WicketApplication extends AuthenticatedWebApplication {
 	@Override
 	public void init() {
 		super.init();
-		mountPage("/home", HomePageUser.class);
+		mountPage("/home", HomePage.class);
 
 	}
 
@@ -31,12 +31,12 @@ public class WicketApplication extends AuthenticatedWebApplication {
 
 	@Override
 	protected Class<? extends WebPage> getSignInPageClass() {
-		return LogInPageUser.class;
+		return LogInPage.class;
 	}
 
 	public Class getHomePage()
 	{
-		return HomePageUser.class;
+		return HomePage.class;
 	}
 
 

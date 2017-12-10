@@ -1,4 +1,6 @@
 package com.sergey.prykhodko.front.pages.admin;
 
-public class AdminCabinet {
+import com.sergey.prykhodko.front.pages.basepage.adminbasepage.AdminBasePage;
+
+public class AdminCabinet extends AdminBasePage {
 }

@@ -1,9 +1,10 @@
 package com.sergey.prykhodko.front.pages.login;
 
+import com.sergey.prykhodko.front.pages.admin.AdminCabinet;
 import com.sergey.prykhodko.front.pages.basepage.userbasepage.UserBasePage;
-import com.sergey.prykhodko.front.pages.home.HomePageUser;
-import com.sergey.prykhodko.front.pages.user.cabinet.UserCabinetPageUser;
-import com.sergey.prykhodko.front.pages.user.registration.RegistrationPageUser;
+import com.sergey.prykhodko.front.pages.home.HomePage;
+import com.sergey.prykhodko.front.pages.user.cabinet.UserCabinetPage;
+import com.sergey.prykhodko.front.pages.user.registration.RegistrationPage;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;
 import org.apache.wicket.markup.html.form.PasswordTextField;
@@ -16,7 +17,7 @@ import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.util.string.Strings;
 import org.apache.wicket.util.value.ValueMap;
 
-public class LogInPageUser extends UserBasePage {
+public class LogInPage extends UserBasePage {
     private static final long serialVersionUID = 1L;
 
     private static final String FORM = "form";
@@ -56,9 +57,11 @@ public class LogInPageUser extends UserBasePage {
                     AuthenticatedWebSession session = (AuthenticatedWebSession) getSession();
                     Roles role = session.getRoles();
                     if (role.equals(new Roles(Roles.USER))){
-                        setResponsePage(UserCabinetPageUser.class);
+                        setResponsePage(UserCabinetPage.class);
+                    }else if (role.equals(new Roles(Roles.ADMIN))){
+                        setResponsePage(AdminCabinet.class);
                     } else {
-                        setResponsePage(HomePageUser.class);
+                        setResponsePage(HomePage.class);
                     }
                 } else {
                     if (Strings.isEmpty(login)){
@@ -85,7 +88,7 @@ public class LogInPageUser extends UserBasePage {
         add(new Link(REGISTRATION) {
             @Override
             public void onClick() {
-                setResponsePage(RegistrationPageUser.class);
+                setResponsePage(RegistrationPage.class);
             }
         });
     }

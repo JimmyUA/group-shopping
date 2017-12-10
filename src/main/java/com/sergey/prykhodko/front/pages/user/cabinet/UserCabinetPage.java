@@ -2,7 +2,7 @@ package com.sergey.prykhodko.front.pages.user.cabinet;
 
 import com.sergey.prykhodko.dao.factory.FactoryType;
 import com.sergey.prykhodko.front.pages.basepage.userbasepage.UserBasePage;
-import com.sergey.prykhodko.front.pages.user.suborder.SubOrderAddingPageUser;
+import com.sergey.prykhodko.front.pages.user.suborder.SubOrderAddingPage;
 import com.sergey.prykhodko.front.util.events.CurrencyChangedEvent;
 import com.sergey.prykhodko.model.order.Order;
 import com.sergey.prykhodko.model.order.suborder.SubOrder;
@@ -25,7 +25,7 @@ import org.apache.wicket.request.cycle.RequestCycle;
 
 import java.util.List;
 
-public class UserCabinetPageUser extends UserBasePage {
+public class UserCabinetPage extends UserBasePage {
 
     private final static Logger logger = Logger.getLogger(ClassName.getCurrentClassName());
 
@@ -96,7 +96,7 @@ public class UserCabinetPageUser extends UserBasePage {
                     openedSuborderNotice = "У Вас нетоткрытых подзаказов!";
                 } else {
                     openedSuborderNotice = "У Вас есть открытый подзаказ #" + openedSuborder.getId() + " на сумму " +
-                            new MoneyConverter(UserCabinetPageUser.this)
+                            new MoneyConverter(UserCabinetPage.this)
                                     .convertFromUAHtoTarget(openedSuborder.getSumSubOrder(),
                                             getCurrencyValue()) / 100.0 + getCurrencyLabel() + " в текущем заказе";
                 }
@@ -121,7 +121,7 @@ public class UserCabinetPageUser extends UserBasePage {
             private void addSumMessage(Item<Order> item) {
                 final Integer sumOrder = item.getModelObject().getSumOrder();
                 String orderSumMessage = "Текущая сумма заказа - " +
-                        new MoneyConverter(UserCabinetPageUser.this)
+                        new MoneyConverter(UserCabinetPage.this)
                         .convertFromUAHtoTarget(sumOrder,
                         getCurrencyValue()) / 100.0 + getCurrencyLabel();
 
@@ -141,9 +141,9 @@ public class UserCabinetPageUser extends UserBasePage {
                     @Override
                     public void onClick() {
                         if (openedSuborder == null) {
-                            setResponsePage(new SubOrderAddingPageUser(item.getModelObject()));
+                            setResponsePage(new SubOrderAddingPage(item.getModelObject()));
                         } else {
-                            setResponsePage(new SubOrderAddingPageUser(item.getModelObject(), openedSuborder));
+                            setResponsePage(new SubOrderAddingPage(item.getModelObject(), openedSuborder));
                         }
                     }
 

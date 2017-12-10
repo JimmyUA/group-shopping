@@ -11,7 +11,7 @@ import org.apache.wicket.Session;
 import org.apache.wicket.event.IEvent;
 import org.apache.wicket.markup.html.basic.Label;
 
-public class SubOrderAddingPageUser extends UserBasePage {
+public class SubOrderAddingPage extends UserBasePage {
 
     private final static Logger logger = Logger.getLogger(ClassName.getCurrentClassName());
 
@@ -22,11 +22,11 @@ public class SubOrderAddingPageUser extends UserBasePage {
     private String currentSumLabelMessage;
     private Label currentSumLabel;
 
-    public SubOrderAddingPageUser(Order order) {
+    public SubOrderAddingPage(Order order) {
         this.order = order;
     }
 
-    public SubOrderAddingPageUser(Order order, SubOrder subOrder) {
+    public SubOrderAddingPage(Order order, SubOrder subOrder) {
         this.order = order;
         this.subOrder = subOrder;
     }

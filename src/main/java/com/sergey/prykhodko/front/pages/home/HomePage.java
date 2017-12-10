@@ -9,7 +9,7 @@ import org.apache.wicket.markup.html.link.Link;
 /**
  * Homepage
  */
-public class HomePageUser extends UserBasePage {
+public class HomePage extends UserBasePage {
 
     private final static String WELCOME = "Welcome to Foreign Shops!";
     private final static String LABEL_ID = "message";
@@ -18,7 +18,7 @@ public class HomePageUser extends UserBasePage {
 
     private static final long serialVersionUID = 1L;
 
-    public HomePageUser() {
+    public HomePage() {
 
         add(new Label(LABEL_ID, WELCOME));
 

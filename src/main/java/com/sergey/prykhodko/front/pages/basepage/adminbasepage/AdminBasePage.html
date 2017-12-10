@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:wicket="http://www.w3.org/1999/xhtml">
+<link rel="stylesheet" href="webjars/bootstrap/3.3.7/css/bootstrap.css">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>AdminBase</title>
 </head>
 <body>
-$END$
+<div wicket:id="menuPanel"></div>
+<wicket:child>child page here</wicket:child>
+<div wicket:id="footerPanel">
+</div>
 </body>
 </html>
