@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 public class EmailValidator implements IValidator<String> {
 
     private final String EMAIL_PATTERN
-            = "^([\\w-.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$";
+            = "^([\\w-.а-яА-Я]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$";
     private final Pattern pattern;
 
     public EmailValidator() {
