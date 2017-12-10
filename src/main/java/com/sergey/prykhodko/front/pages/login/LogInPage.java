@@ -40,7 +40,17 @@ public class LogInPage extends BasePage {
     protected void onInitialize() {
         super.onInitialize();
 
-        StatelessForm form = new StatelessForm(FORM){
+        StatelessForm form = getForm();
+
+        setDefaultModel(form);
+        setComponents(form);
+        add(form);
+
+        addRegistrationLink();
+    }
+
+    private StatelessForm getForm() {
+        return new StatelessForm(FORM){
 
             @Override
             protected void onSubmit(){
@@ -50,35 +60,7 @@ public class LogInPage extends BasePage {
 
 
             }
-
-            private void checkIfAuthenticateDone() {
-                if (AuthenticatedWebSession.get().signIn(login, password)){
-                    AuthenticatedWebSession session = (AuthenticatedWebSession) getSession();
-                    Roles role = session.getRoles();
-                    if (role.equals(new Roles(Roles.USER))){
-                        setResponsePage(UserCabinetPage.class);
-                    } else {
-                        setResponsePage(HomePage.class);
-                    }
-                } else {
-                    if (Strings.isEmpty(login)){
-                        error(MISSED_LOGIN);
-                    }
-                    if (Strings.isEmpty(password)){
-                        error(MISSED_PASSWORD);
-                    } else {
-                        error(INVALID_CREDENTIALS);
-                    }
-                }
-            }
-
         };
-
-        setDefaultModel(form);
-        setComponents(form);
-        add(form);
-
-        addRegistrationLink();
     }
 
     private void addRegistrationLink() {
@@ -98,5 +80,26 @@ public class LogInPage extends BasePage {
         form.add(new TextField<>(LOGIN, new PropertyModel<>(properties, LOGIN)));
         form.add(new PasswordTextField(PASSWORD, new PropertyModel<>(properties, PASSWORD)));
         form.add(new FeedbackPanel(FEEDBACK));
+    }
+
+    private void checkIfAuthenticateDone() {
+        if (AuthenticatedWebSession.get().signIn(login, password)){
+            AuthenticatedWebSession session = (AuthenticatedWebSession) getSession();
+            Roles role = session.getRoles();
+            if (role.equals(new Roles(Roles.USER))){
+                setResponsePage(UserCabinetPage.class);
+            } else {
+                setResponsePage(HomePage.class);
+            }
+        } else {
+            if (Strings.isEmpty(login)){
+                error(MISSED_LOGIN);
+            }
+            if (Strings.isEmpty(password)){
+                error(MISSED_PASSWORD);
+            } else {
+                error(INVALID_CREDENTIALS);
+            }
+        }
     }
 }
