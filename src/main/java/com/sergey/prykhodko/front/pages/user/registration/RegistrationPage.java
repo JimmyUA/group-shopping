@@ -42,7 +42,14 @@ public class RegistrationPage extends BasePage {
     protected void onInitialize() {
         super.onInitialize();
 
-        Form form = new StatelessForm(FORM) {
+        Form form = getForm();
+
+        add(form);
+
+    }
+
+    private StatelessForm getForm() {
+        return new StatelessForm(FORM) {
 
             @Override
             protected void onInitialize() {
@@ -58,7 +65,8 @@ public class RegistrationPage extends BasePage {
                 TextField<String> mobileTextField = new TextField<>(MOBILE, model.bind(MOBILE));
                 mobileTextField.add(new MobileNumberValidator());
                 PasswordTextField passwordTextField = new PasswordTextField(PASSWORD, model.bind(PASSWORD));
-                PasswordTextField passwordConfTextField = new PasswordTextField(PASSWORD_CONFIRMATION, new PropertyModel<>(properties, PASSWORD_CONFIRMATION));
+                PasswordTextField passwordConfTextField = new PasswordTextField(PASSWORD_CONFIRMATION,
+                        new PropertyModel<>(properties, PASSWORD_CONFIRMATION));
 
                 add(new EqualPasswordInputValidator(passwordTextField, passwordConfTextField));
                 add(new FeedbackPanel(FEEDBACK));
@@ -85,8 +93,5 @@ public class RegistrationPage extends BasePage {
                setResponsePage(UserCabinetPage.class);
              }
         };
-
-        add(form);
-
     }
 }
