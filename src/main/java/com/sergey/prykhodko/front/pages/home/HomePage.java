@@ -1,7 +1,7 @@
 package com.sergey.prykhodko.front.pages.home;
 
 import com.sergey.prykhodko.front.pages.basepage.BasePage;
-import com.sergey.prykhodko.front.pages.user.UsersList;
+import com.sergey.prykhodko.front.pages.user.cabinet.UserCabinetPage;
 import com.sergey.prykhodko.util.Authentication;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
@@ -11,18 +11,11 @@ import org.apache.wicket.markup.html.link.Link;
  */
 public class HomePage extends BasePage {
 
-    private final static String WELCOME = "Welcome to Foreign Shops!";
+    private final static String WELCOME = "Приветствуем в Group Shopping!";
     private final static String LABEL_ID = "message";
-    private final static String USERS_LIST_LINK_ID = "goToUsersList";
-    private final static String LOG_OUT_LINK_ID = "logOut";
+    private final static String USER_CABINEt_LINK_ID = "goToUserCabinet";
 
     private static final long serialVersionUID = 1L;
-
-    public HomePage() {
-
-        add(new Label(LABEL_ID, WELCOME));
-
-    }
 
     @Override
     protected void onConfigure() {
@@ -33,21 +26,20 @@ public class HomePage extends BasePage {
     @Override
     protected void onInitialize() {
         super.onInitialize();
-
+        add(new Label(LABEL_ID, WELCOME));
         setComponents();
     }
 
     private void setComponents() {
         addUserListLink();
-
     }
 
 
     private void addUserListLink() {
-        add(new Link(USERS_LIST_LINK_ID) {
+        add(new Link(USER_CABINEt_LINK_ID) {
             @Override
             public void onClick() {
-                setResponsePage(getApplication().getPageFactory().newPage(UsersList.class));
+                setResponsePage(getApplication().getPageFactory().newPage(UserCabinetPage.class));
             }
         }.setAutoEnable(true));
     }
