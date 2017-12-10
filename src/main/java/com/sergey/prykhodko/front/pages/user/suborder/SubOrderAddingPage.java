@@ -34,20 +34,28 @@ public class SubOrderAddingPage extends BasePage {
     @Override
     protected void onInitialize() {
         super.onInitialize();
-        String orderLabelMessage = "Заказ # " + order.getOrderId() + " " + order.getShopName().getName();
-        add(new Label("orderLabel", orderLabelMessage));
+        addOrderLabel();
 
         currentSumLabelMessage = getCurrentSumLabelMessage();
         currentSumLabel = new Label("currentSumLabel", currentSumLabelMessage);
         add(currentSumLabel);
         SubOrderAddingPanel subOrderAddingPanel;
-        if (subOrder == null) {
+        if (userHaveNoSuborder()) {
             subOrderAddingPanel = new SubOrderAddingPanel("subOrderAdding", order);
         } else {
             subOrderAddingPanel = new SubOrderAddingPanel("subOrderAdding", order, subOrder);
         }
         subOrderAddingPanel.setCurrency(currency);
         add(subOrderAddingPanel);
+    }
+
+    private boolean userHaveNoSuborder() {
+        return subOrder == null;
+    }
+
+    private void addOrderLabel() {
+        String orderLabelMessage = "Заказ # " + order.getOrderId() + " " + order.getShopName().getName();
+        add(new Label("orderLabel", orderLabelMessage));
     }
 
     private String getCurrentSumLabelMessage() {
