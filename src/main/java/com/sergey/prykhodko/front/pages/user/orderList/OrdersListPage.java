@@ -31,12 +31,19 @@ public class OrdersListPage extends BasePage {
 
         ListDataProvider<Order> listDataProvider = new ListDataProvider<>(orders);
 
-        DataView<Order> dataView = new DataView<Order>("orderView", listDataProvider) {
+        DataView<Order> dataView = getDataView(listDataProvider);
+
+        add(dataView);
+    }
+
+    private DataView<Order> getDataView(ListDataProvider<Order> listDataProvider) {
+        return new DataView<Order>("orderView", listDataProvider) {
             @Override
             protected void populateItem(Item<Order> item) {
-                item.add(new Label("id", "Заказ # " + item.getModelObject().getOrderId()));
-                item.add(new Label("shopName", item.getModelObject().getShopName()));
-                item.add(new ExternalLink("shopLink", new Model<>(item.getModelObject().getShopName().getLink()),
+                final Order modelObject = item.getModelObject();
+                item.add(new Label("id", "Заказ # " + modelObject.getOrderId()));
+                item.add(new Label("shopName", modelObject.getShopName()));
+                item.add(new ExternalLink("shopLink", new Model<>(modelObject.getShopName().getLink()),
                         new Model<>("Ссылка на магазин")){
 
                     @Override
@@ -49,15 +56,13 @@ public class OrdersListPage extends BasePage {
 
                     @Override
                     public void onClick() {
-                        setResponsePage(new SubOrderAddingPage(item.getModelObject()));
+                        setResponsePage(new SubOrderAddingPage(modelObject));
                     }
                 };
-                ContextImage shopImage = new ContextImage("img", item.getModelObject().getShopName().getLogoPath());
+                ContextImage shopImage = new ContextImage("img", modelObject.getShopName().getLogoPath());
                 imageLink.add(shopImage);
                 item.add(imageLink);
             }
         };
-
-        add(dataView);
     }
 }
