@@ -38,6 +38,7 @@ public class SubOrderAddingPanel extends Panel {
     private Order order;
     private SubOrder subOrder;
     private Button addSubOrderButton;
+    private Button addLinkButton;
 
     private TextField<String> linkTF;
     private NumberTextField<Integer> amountTF;
@@ -72,21 +73,29 @@ public class SubOrderAddingPanel extends Panel {
         DataView<Link> linksDataView = getLinksDataView(linksDataProvider);
 
         Form<Void> form = new Form<>("form");
+        initComponents();
+
+        addComponentsOnForm(form);
+        add(linksDataView);
+        add(form);
+    }
+
+    private void initComponents() {
         linkTF = new TextField<>("linkTF", new Model<>());
         amountTF = new NumberTextField<>("amountTF", new Model<>(), Integer.class);
         priceTF = new TextField<>("priceTF", new Model<>(""));
-        Button addLinkButton = getAddLinkButton(linkTF, amountTF, priceTF);
+        addLinkButton = getAddLinkButton(linkTF, amountTF, priceTF);
 
         addSubOrderButton = getAddSubOrderButton();
-
         addSubOrderButton.setVisible(false);
+    }
+
+    private void addComponentsOnForm(Form<Void> form) {
         form.add(linkTF);
         form.add(amountTF);
         form.add(priceTF);
         form.add(addLinkButton);
         form.add(addSubOrderButton);
-        add(linksDataView);
-        add(form);
     }
 
     private void getUserFromSession() {
