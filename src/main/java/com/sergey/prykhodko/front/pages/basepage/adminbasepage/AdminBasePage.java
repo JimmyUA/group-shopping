@@ -10,6 +10,7 @@ public class AdminBasePage extends WebPage {
         super.onInitialize();
 
         add(new AdminMenuPanel("menuPanel"));
+        add(new AdminNavigationPanel("adminPanel"));
         add(new FooterPanel("footerPanel"));
     }
 }

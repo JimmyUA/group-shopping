@@ -1,5 +1,6 @@
 package com.sergey.prykhodko.front.pages.basepage.adminbasepage;
 
+import com.sergey.prykhodko.front.pages.admin.AdminCabinet;
 import com.sergey.prykhodko.front.pages.admin.UsersListPage;
 import com.sergey.prykhodko.front.pages.basepage.MenuPanel;
 import com.sergey.prykhodko.front.pages.user.orderList.OrdersListPage;
@@ -69,7 +70,7 @@ public class AdminMenuPanel extends MenuPanel{
         add(new Link(HOME_PAGE_LINK_ID) {
             @Override
             public void onClick() {
-                setResponsePage(getApplication().getHomePage());
+                setResponsePage(AdminCabinet.class);
             }
         });
     }

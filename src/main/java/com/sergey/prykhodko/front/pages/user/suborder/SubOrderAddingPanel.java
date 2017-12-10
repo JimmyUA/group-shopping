@@ -75,7 +75,7 @@ public class SubOrderAddingPanel extends Panel {
         amountTF = new NumberTextField<>("amountTF", new Model<>(), Integer.class);
         priceTF = new TextField<>("priceTF", new Model<>(""));
         Button addLinkButton = getAddLinkButton(linkTF, amountTF, priceTF);
-
+//TODO add delete button
         addSubOrderButton = getAddSubOrderButton();
 
         addSubOrderButton.setVisible(false);
