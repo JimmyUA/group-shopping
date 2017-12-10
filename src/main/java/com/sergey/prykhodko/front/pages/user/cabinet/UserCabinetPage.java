@@ -1,7 +1,7 @@
 package com.sergey.prykhodko.front.pages.user.cabinet;
 
 import com.sergey.prykhodko.dao.factory.FactoryType;
-import com.sergey.prykhodko.front.pages.userbasepage.UserBasePage;
+import com.sergey.prykhodko.front.pages.basepage.userbasepage.UserBasePage;
 import com.sergey.prykhodko.front.pages.user.suborder.SubOrderAddingPageUser;
 import com.sergey.prykhodko.front.util.events.CurrencyChangedEvent;
 import com.sergey.prykhodko.model.order.Order;

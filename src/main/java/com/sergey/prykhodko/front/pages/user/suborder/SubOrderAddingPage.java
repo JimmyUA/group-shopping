@@ -1,6 +1,6 @@
 package com.sergey.prykhodko.front.pages.user.suborder;
 
-import com.sergey.prykhodko.front.pages.userbasepage.UserBasePage;
+import com.sergey.prykhodko.front.pages.basepage.userbasepage.UserBasePage;
 import com.sergey.prykhodko.front.util.events.CurrencyChangedEvent;
 import com.sergey.prykhodko.model.order.Order;
 import com.sergey.prykhodko.model.order.suborder.SubOrder;

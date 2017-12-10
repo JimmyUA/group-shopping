@@ -1,7 +1,7 @@
 package com.sergey.prykhodko.front.pages.home;
 
-import com.sergey.prykhodko.front.pages.userbasepage.UserBasePage;
-import com.sergey.prykhodko.front.pages.admin.UsersList;
+import com.sergey.prykhodko.front.pages.basepage.userbasepage.UserBasePage;
+import com.sergey.prykhodko.front.pages.admin.UsersListPage;
 import com.sergey.prykhodko.util.Authentication;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
@@ -47,7 +47,7 @@ public class HomePageUser extends UserBasePage {
         add(new Link(USERS_LIST_LINK_ID) {
             @Override
             public void onClick() {
-                setResponsePage(getApplication().getPageFactory().newPage(UsersList.class));
+                setResponsePage(getApplication().getPageFactory().newPage(UsersListPage.class));
             }
         }.setAutoEnable(true));
     }

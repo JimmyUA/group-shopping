@@ -1,6 +1,6 @@
 package com.sergey.prykhodko.front.pages.user.registration;
 
-import com.sergey.prykhodko.front.pages.userbasepage.UserBasePage;
+import com.sergey.prykhodko.front.pages.basepage.userbasepage.UserBasePage;
 import com.sergey.prykhodko.front.pages.user.cabinet.UserCabinetPageUser;
 import com.sergey.prykhodko.front.util.captcha.Captcha;
 import com.sergey.prykhodko.front.util.validators.EmailValidator;

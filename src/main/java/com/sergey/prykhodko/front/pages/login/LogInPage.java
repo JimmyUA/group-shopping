@@ -1,6 +1,6 @@
 package com.sergey.prykhodko.front.pages.login;
 
-import com.sergey.prykhodko.front.pages.userbasepage.UserBasePage;
+import com.sergey.prykhodko.front.pages.basepage.userbasepage.UserBasePage;
 import com.sergey.prykhodko.front.pages.home.HomePageUser;
 import com.sergey.prykhodko.front.pages.user.cabinet.UserCabinetPageUser;
 import com.sergey.prykhodko.front.pages.user.registration.RegistrationPageUser;
