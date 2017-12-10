@@ -15,8 +15,11 @@ import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.PropertyModel;
+import org.apache.wicket.request.Request;
 import org.apache.wicket.request.cycle.RequestCycle;
+import org.apache.wicket.session.ISessionStore;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
@@ -28,7 +31,7 @@ public class MenuPanel extends Panel {
     private static final String DROP_DOWN_ID = "currencyChoice";
     private static final String CURRENCIES_APP_STORAGE_KEY = "currencies";
 
-    protected CurrencyConversionResponse currencyRates = (CurrencyConversionResponse) getApplication().getSessionStore().getAttribute(RequestCycle.get().getRequest(), CURRENCIES_APP_STORAGE_KEY);
+    protected CurrencyConversionResponse currencyRates = (CurrencyConversionResponse) getCurrencyFromSessionStore(getApplication().getSessionStore(), RequestCycle.get().getRequest());
 
     private final static Logger logger = Logger.getLogger(ClassName.getCurrentClassName());
 
@@ -37,19 +40,35 @@ public class MenuPanel extends Panel {
 
     private String selected = "(UA) Гривны";
 
+    private ISessionStore sessionStore;
+
     public MenuPanel(String id) {
         super(id);
-        addComponentsToForm();
     }
 
     @Override
     protected void onInitialize() {
         super.onInitialize();
 
-        if (getApplication().getSessionStore().getAttribute(getRequest(), CURRENCIES_APP_STORAGE_KEY) == null) {
+        addComponentsToForm();
+
+        sessionStore = getApplication().getSessionStore();
+        if (noCurrencySet(sessionStore)) {
             CurrencyConversionResponse currencyRates = new CurrencyExchangeRatesGetter().getResponse();
-            getApplication().getSessionStore().setAttribute(getRequest(), CURRENCIES_APP_STORAGE_KEY, currencyRates);
+            setCurrency(sessionStore, currencyRates);
         }
+    }
+
+    private void setCurrency(ISessionStore sessionStore, CurrencyConversionResponse currencyRates) {
+        sessionStore.setAttribute(getRequest(), CURRENCIES_APP_STORAGE_KEY, currencyRates);
+    }
+
+    private boolean noCurrencySet(ISessionStore sessionStore) {
+        return getCurrencyFromSessionStore(sessionStore, getRequest()) == null;
+    }
+
+    private Serializable getCurrencyFromSessionStore(ISessionStore sessionStore, Request request) {
+        return sessionStore.getAttribute(request, CURRENCIES_APP_STORAGE_KEY);
     }
 
     private void addComponentsToForm() {
@@ -112,11 +131,11 @@ public class MenuPanel extends Panel {
 
     private void getExchangeRates() {
 
-        currencyRates = (CurrencyConversionResponse) getApplication().getSessionStore().getAttribute(RequestCycle.get().getRequest(), CURRENCIES_APP_STORAGE_KEY);
+        currencyRates = (CurrencyConversionResponse) getCurrencyFromSessionStore(sessionStore, getRequest());
         logger.info(currencyRates.getQuotes());
         if (noCurrenciesIsSet() || isRatesNoUpToDate()) {
             currencyRates = new CurrencyExchangeRatesGetter().getResponse();
-            getApplication().getSessionStore().setAttribute(getRequest(), CURRENCIES_APP_STORAGE_KEY, currencyRates);
+            setCurrency(sessionStore, currencyRates);
         }
     }
 
