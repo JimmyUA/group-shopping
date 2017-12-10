@@ -1,4 +1,4 @@
-package com.sergey.prykhodko.front.pages.user;
+package com.sergey.prykhodko.front.pages.admin;
 
 import org.apache.wicket.markup.html.WebPage;
 

@@ -1,6 +1,6 @@
-package com.sergey.prykhodko.front.pages.basepage;
+package com.sergey.prykhodko.front.pages.userbasepage;
 
-import com.sergey.prykhodko.front.pages.user.orderList.OrdersListPage;
+import com.sergey.prykhodko.front.pages.user.orderList.OrdersListPageUser;
 import com.sergey.prykhodko.front.util.events.CurrencyChangedEvent;
 import com.sergey.prykhodko.util.ClassName;
 import com.sergey.prykhodko.util.currency.CurrencyConversionResponse;
@@ -96,7 +96,7 @@ public class MenuPanel extends Panel {
         add(new Link(ORDERS_LIST_PAGE_LINK_ID) {
             @Override
             public void onClick() {
-                setResponsePage(OrdersListPage.class);
+                setResponsePage(OrdersListPageUser.class);
             }
         });
     }

@@ -1,6 +1,6 @@
 package com.sergey.prykhodko.front.pages.user.suborder;
 
-import com.sergey.prykhodko.front.pages.basepage.BasePage;
+import com.sergey.prykhodko.front.pages.userbasepage.UserBasePage;
 import com.sergey.prykhodko.front.util.events.CurrencyChangedEvent;
 import com.sergey.prykhodko.model.order.Order;
 import com.sergey.prykhodko.model.order.suborder.SubOrder;
@@ -11,7 +11,7 @@ import org.apache.wicket.Session;
 import org.apache.wicket.event.IEvent;
 import org.apache.wicket.markup.html.basic.Label;
 
-public class SubOrderAddingPage extends BasePage {
+public class SubOrderAddingPageUser extends UserBasePage {
 
     private final static Logger logger = Logger.getLogger(ClassName.getCurrentClassName());
 
@@ -22,11 +22,11 @@ public class SubOrderAddingPage extends BasePage {
     private String currentSumLabelMessage;
     private Label currentSumLabel;
 
-    public SubOrderAddingPage(Order order) {
+    public SubOrderAddingPageUser(Order order) {
         this.order = order;
     }
 
-    public SubOrderAddingPage(Order order, SubOrder subOrder) {
+    public SubOrderAddingPageUser(Order order, SubOrder subOrder) {
         this.order = order;
         this.subOrder = subOrder;
     }

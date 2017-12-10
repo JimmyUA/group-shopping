@@ -1,7 +1,7 @@
 package com.sergey.prykhodko.front.pages.home;
 
-import com.sergey.prykhodko.front.pages.basepage.BasePage;
-import com.sergey.prykhodko.front.pages.user.UsersList;
+import com.sergey.prykhodko.front.pages.userbasepage.UserBasePage;
+import com.sergey.prykhodko.front.pages.admin.UsersList;
 import com.sergey.prykhodko.util.Authentication;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
@@ -9,7 +9,7 @@ import org.apache.wicket.markup.html.link.Link;
 /**
  * Homepage
  */
-public class HomePage extends BasePage {
+public class HomePageUser extends UserBasePage {
 
     private final static String WELCOME = "Welcome to Foreign Shops!";
     private final static String LABEL_ID = "message";
@@ -18,7 +18,7 @@ public class HomePage extends BasePage {
 
     private static final long serialVersionUID = 1L;
 
-    public HomePage() {
+    public HomePageUser() {
 
         add(new Label(LABEL_ID, WELCOME));
 

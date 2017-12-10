@@ -1,9 +1,9 @@
 package com.sergey.prykhodko.front.pages.login;
 
-import com.sergey.prykhodko.front.pages.basepage.BasePage;
-import com.sergey.prykhodko.front.pages.home.HomePage;
-import com.sergey.prykhodko.front.pages.user.cabinet.UserCabinetPage;
-import com.sergey.prykhodko.front.pages.user.registration.RegistrationPage;
+import com.sergey.prykhodko.front.pages.userbasepage.UserBasePage;
+import com.sergey.prykhodko.front.pages.home.HomePageUser;
+import com.sergey.prykhodko.front.pages.user.cabinet.UserCabinetPageUser;
+import com.sergey.prykhodko.front.pages.user.registration.RegistrationPageUser;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;
 import org.apache.wicket.markup.html.form.PasswordTextField;
@@ -16,7 +16,7 @@ import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.util.string.Strings;
 import org.apache.wicket.util.value.ValueMap;
 
-public class LogInPage extends BasePage {
+public class LogInPageUser extends UserBasePage {
     private static final long serialVersionUID = 1L;
 
     private static final String FORM = "form";
@@ -56,9 +56,9 @@ public class LogInPage extends BasePage {
                     AuthenticatedWebSession session = (AuthenticatedWebSession) getSession();
                     Roles role = session.getRoles();
                     if (role.equals(new Roles(Roles.USER))){
-                        setResponsePage(UserCabinetPage.class);
+                        setResponsePage(UserCabinetPageUser.class);
                     } else {
-                        setResponsePage(HomePage.class);
+                        setResponsePage(HomePageUser.class);
                     }
                 } else {
                     if (Strings.isEmpty(login)){
@@ -85,7 +85,7 @@ public class LogInPage extends BasePage {
         add(new Link(REGISTRATION) {
             @Override
             public void onClick() {
-                setResponsePage(RegistrationPage.class);
+                setResponsePage(RegistrationPageUser.class);
             }
         });
     }

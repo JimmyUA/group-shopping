@@ -1,8 +1,8 @@
 package com.sergey.prykhodko.front.pages.user.orderList;
 
 import com.sergey.prykhodko.dao.factory.FactoryType;
-import com.sergey.prykhodko.front.pages.basepage.BasePage;
-import com.sergey.prykhodko.front.pages.user.suborder.SubOrderAddingPage;
+import com.sergey.prykhodko.front.pages.userbasepage.UserBasePage;
+import com.sergey.prykhodko.front.pages.user.suborder.SubOrderAddingPageUser;
 import com.sergey.prykhodko.model.order.Order;
 import com.sergey.prykhodko.services.OrderService;
 import org.apache.wicket.markup.ComponentTag;
@@ -17,10 +17,10 @@ import org.apache.wicket.model.Model;
 
 import java.util.List;
 
-public class OrdersListPage extends BasePage {
+public class OrdersListPageUser extends UserBasePage {
     private List<Order> orders;
 
-    public OrdersListPage() {
+    public OrdersListPageUser() {
 
         orders = OrderService.getOrderService(FactoryType.SPRING).getActiveOrders();
     }
@@ -49,7 +49,7 @@ public class OrdersListPage extends BasePage {
 
                     @Override
                     public void onClick() {
-                        setResponsePage(new SubOrderAddingPage(item.getModelObject()));
+                        setResponsePage(new SubOrderAddingPageUser(item.getModelObject()));
                     }
                 };
                 ContextImage shopImage = new ContextImage("img", item.getModelObject().getShopName().getLogoPath());

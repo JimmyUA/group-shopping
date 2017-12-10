@@ -1,4 +1,4 @@
-package com.sergey.prykhodko.front.pages.basepage;
+package com.sergey.prykhodko.front.pages.userbasepage;
 
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
