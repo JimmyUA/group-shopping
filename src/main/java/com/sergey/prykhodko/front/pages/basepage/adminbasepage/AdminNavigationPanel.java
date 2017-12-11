@@ -1,6 +1,6 @@
 package com.sergey.prykhodko.front.pages.basepage.adminbasepage;
 
-import com.sergey.prykhodko.front.pages.admin.admincabinet.OpenedOrdersForAdmin;
+import com.sergey.prykhodko.front.pages.admin.admincabinet.openedorders.OpenedOrdersForAdmin;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.Panel;
 

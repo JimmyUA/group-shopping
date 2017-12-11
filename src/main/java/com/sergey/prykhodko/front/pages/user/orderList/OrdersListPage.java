@@ -31,7 +31,13 @@ public class OrdersListPage extends UserBasePage {
 
         ListDataProvider<Order> listDataProvider = new ListDataProvider<>(orders);
 
-        DataView<Order> dataView = new DataView<Order>("orderView", listDataProvider) {
+        DataView<Order> dataView = getDataView(listDataProvider);
+
+        add(dataView);
+    }
+
+    private DataView<Order> getDataView(ListDataProvider<Order> listDataProvider) {
+        return new DataView<Order>("orderView", listDataProvider) {
             @Override
             protected void populateItem(Item<Order> item) {
                 item.add(new Label("id", "Заказ # " + item.getModelObject().getOrderId()));
@@ -57,7 +63,5 @@ public class OrdersListPage extends UserBasePage {
                 item.add(imageLink);
             }
         };
-
-        add(dataView);
     }
 }
