@@ -1,12 +1,15 @@
 package com.sergey.prykhodko.front.pages.admin.admincabinet.order;
 
 import com.sergey.prykhodko.front.pages.basepage.adminbasepage.AdminBasePage;
+import com.sergey.prykhodko.front.util.data_providers.SubOrderDataProvider;
 import com.sergey.prykhodko.model.order.Order;
 import com.sergey.prykhodko.model.order.suborder.SubOrder;
 import org.apache.wicket.extensions.markup.html.repeater.data.grid.DataGridView;
+import org.apache.wicket.extensions.markup.html.repeater.data.table.DataTable;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.IColumn;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.PropertyColumn;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.repeater.data.IDataProvider;
 import org.apache.wicket.markup.repeater.data.ListDataProvider;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
@@ -34,14 +37,16 @@ public class OrderPageForAdmin extends AdminBasePage {
     }
 
     private void addGrid() {
-        ListDataProvider<SubOrder> subOrderListDataProvider = new ListDataProvider<>(order.getSubOrders());
-
         List<IColumn<SubOrder, String>> columns = new ArrayList<>();
-        columns.add(new PropertyColumn<>(new PropertyModel<>(Model.of("id"), "id"), "id"));
-        DataGridView<SubOrder> dataGridView = new DataGridView<SubOrder>("grid",columns, subOrderListDataProvider){
+        columns.add(new PropertyColumn<SubOrder, String>(Model.of("Id"), "id", "id"));
+        columns.add(new PropertyColumn<SubOrder, String>(Model.of("OwnerId"), "ownerId", "ownerId"));
+        columns.add(new PropertyColumn<SubOrder, String>(Model.of("SumSubOrder"), "sumSubOrder", "sumSubOrder"));
+        columns.add(new PropertyColumn<SubOrder, String>(Model.of("IsPaid"), "isPaid", "isPaid"));
 
-        };
-        add(dataGridView);
+        DataTable<SubOrder, String> dataTable = new DataTable<>("subOrdersDataTable", columns,
+                new SubOrderDataProvider<SubOrder, String>(order.getSubOrders(), "id"), 10);
+
+        add(dataTable);
     }
 
     private void addShopLabel() {
@@ -62,7 +67,7 @@ public class OrderPageForAdmin extends AdminBasePage {
     }
 
     private String getStatus() {
-        if (order.isStarted()){
+        if (order.isStarted()) {
             return "открыт";
         } else {
             return "закрыт";
