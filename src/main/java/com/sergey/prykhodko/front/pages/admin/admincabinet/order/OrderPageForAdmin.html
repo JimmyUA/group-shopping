@@ -8,8 +8,28 @@
 <wicket:extend>
     <div wicket:id="orderBaseInfo" ></div>
     <div wicket:id="shopLabel" ></div>
-    <table wicket:id="subOrdersDataTable" class="table table-striped">
+    <form wicket:id="form">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        </thead>
+        <tbody wicket:id="subOrdersDataView">
+        <tr>
+            <td wicket:id="subOrderId"><label wicket:id="id"></label></td>
+            <td wicket:id="subOrderOwnerId"><label wicket:id="ownerId"></label></td>
+            <td wicket:id="isPaid"></td>
+            <td wicket:id="subOrderSum"></td>
+            <td><input type="submit" wicket:id="setPaidButton" value="Set Paid"></td>
+        </tr>
+        </tbody>
     </table>
+    </form>
 </wicket:extend>
 
 </body>
