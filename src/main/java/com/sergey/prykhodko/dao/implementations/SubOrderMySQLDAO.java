@@ -4,7 +4,10 @@ import com.sergey.prykhodko.dao.SubOrderDAO;
 import com.sergey.prykhodko.model.order.suborder.SubOrder;
 import com.sergey.prykhodko.util.ClassName;
 import com.sergey.prykhodko.util.DataSources;
+import com.sergey.prykhodko.util.PasswordEncoder;
 import com.sergey.prykhodko.util.queries.SQLOrderCommands;
+import com.sergey.prykhodko.util.queries.SQLSubOrderCommands;
+import com.sergey.prykhodko.util.queries.SQLUserCommands;
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
@@ -25,6 +28,7 @@ public class SubOrderMySQLDAO implements SubOrderDAO {
     private static final String ID_USER = "id_user";
     private static final String SUM_SUBORDER = "sum_suborder";
     private static final String IS_PAID = "is_paid";
+
 
     private final static Logger logger = Logger.getLogger(ClassName.getCurrentClassName());
 
@@ -57,6 +61,22 @@ public class SubOrderMySQLDAO implements SubOrderDAO {
         jdbcTemplate.update(INSERT, getAddPreparedStatementSetter(subOrder));
         logger.info("SubOrder with links " + subOrder.getLinks() + "is stored in DB");
     }
+
+    @Override
+    public void update(SubOrder subOrder) {
+        jdbcTemplate.update(SQLSubOrderCommands.UPDATE, getUpdatePreparedStatementSetter(subOrder));
+        logger.info("SubOrder with id '" + subOrder.getId() + "is updated in DB");
+    }
+
+    private PreparedStatementSetter getUpdatePreparedStatementSetter(SubOrder subOrder) {
+        return ps -> {
+            int i = 1;
+            ps.setInt(i++, subOrder.getSumSubOrder());
+            ps.setBoolean(i++, subOrder.isPaid());
+            ps.setInt(i, subOrder.getId());
+        };
+    }
+
 
     @Override
     public Integer getLastId() {

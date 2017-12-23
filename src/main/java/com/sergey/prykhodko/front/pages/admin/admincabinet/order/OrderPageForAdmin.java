@@ -1,9 +1,11 @@
 package com.sergey.prykhodko.front.pages.admin.admincabinet.order;
 
+import com.sergey.prykhodko.dao.factory.FactoryType;
 import com.sergey.prykhodko.front.pages.basepage.adminbasepage.AdminBasePage;
 import com.sergey.prykhodko.front.util.data_providers.SubOrderDataProvider;
 import com.sergey.prykhodko.model.order.Order;
 import com.sergey.prykhodko.model.order.suborder.SubOrder;
+import com.sergey.prykhodko.services.SubOrderService;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.extensions.markup.html.repeater.data.grid.DataGridView;
@@ -76,7 +78,7 @@ public class OrderPageForAdmin extends AdminBasePage {
                     protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
                         super.onSubmit(target, form);
                         current.setPaid(true);
-                        // TODO update in database
+                        SubOrderService.getSubOrderService(FactoryType.SPRING).update(current);
                         target.add(form);
                     }
                 });

@@ -41,4 +41,8 @@ public class SubOrderService {
         }
         return subOrders;
     }
+
+    public void update(SubOrder subOrder) {
+        subOrderDAO.update(subOrder);
+    }
 }

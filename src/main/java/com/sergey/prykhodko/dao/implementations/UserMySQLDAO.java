@@ -74,7 +74,7 @@ public class UserMySQLDAO implements UserDAO {
 
     @Override
     public void update(User user) {
-        jdbcTemplate.update(INSERT, getUpdatePreparedStatementSetter(user));
+        jdbcTemplate.update(UPDATE, getUpdatePreparedStatementSetter(user));
         logger.info("User with login '" + user.getLogin() + "is updated in DB");
     }
 
