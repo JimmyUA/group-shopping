@@ -77,7 +77,7 @@ public class OrderPageForAdmin extends AdminBasePage {
                         super.onSubmit(target, form);
                         current.setPaid(true);
                         // TODO update in database
-                        target.add(this.getPage());
+                        target.add(form);
                     }
                 });
 
