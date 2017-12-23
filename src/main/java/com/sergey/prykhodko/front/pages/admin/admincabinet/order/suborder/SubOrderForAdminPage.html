@@ -6,7 +6,27 @@
 </head>
 <body>
 <wicket:extend>
+    <div wicket:id="mainLabel"></div>
+    <a wicket:id="ownerIdLink"><label wicket:id="ownerId">owner id</label></a>
 
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td>Link ID</td>
+            <td>Link</td>
+            <td>Amount</td>
+            <td>Price</td>
+        </tr>
+        </thead>
+        <tbody wicket:id="linksDataView">
+        <tr>
+            <td wicket:id="id"></td>
+            <td><a wicket:id="linkString" target="_blank"></a></td>
+            <td wicket:id="amount"></td>
+            <td wicket:id="price"></td>
+        </tr>
+        </tbody>
+    </table>
 </wicket:extend>
 
 </body>

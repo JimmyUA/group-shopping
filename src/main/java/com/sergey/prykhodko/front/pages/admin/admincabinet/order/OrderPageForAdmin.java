@@ -66,7 +66,7 @@ public class OrderPageForAdmin extends AdminBasePage {
                     }
                 }.add(new Label("id", current.getId())));
 
-                item.add(new SubmitLink("subOrderOwnerId", Model.of(current.getId())){
+                item.add(new SubmitLink("subOrderOwnerId", Model.of(current.getOwnerId())){
                     @Override
                     public void onSubmit() {
                         super.onSubmit();
@@ -74,7 +74,7 @@ public class OrderPageForAdmin extends AdminBasePage {
                 }.add(new Label("ownerId", current.getOwnerId())));
 
                 item.add(new Label("isPaid", current.isPaid()));
-                item.add(new Label("subOrderSum", current.getSumSubOrder()));
+                item.add(new Label("subOrderSum", current.getSumSubOrder()/100));
                 item.add(new AjaxButton("setPaidButton", form) {
                     @Override
                     protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
