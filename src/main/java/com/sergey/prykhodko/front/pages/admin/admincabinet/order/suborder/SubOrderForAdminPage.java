@@ -1,6 +1,7 @@
 package com.sergey.prykhodko.front.pages.admin.admincabinet.order.suborder;
 
 import com.sergey.prykhodko.dao.factory.FactoryType;
+import com.sergey.prykhodko.front.pages.admin.admincabinet.client.ClientForAdminPage;
 import com.sergey.prykhodko.front.pages.basepage.adminbasepage.AdminBasePage;
 import com.sergey.prykhodko.front.util.data_providers.LinksDataProvider;
 import com.sergey.prykhodko.front.util.data_providers.SubOrderDataProvider;
@@ -36,6 +37,7 @@ public class SubOrderForAdminPage extends AdminBasePage{
             @Override
             public void onSubmit() {
                 super.onSubmit();
+                setResponsePage(new ClientForAdminPage(subOrder.getOwnerId()));
             }
         }.add(new Label("ownerId", "Owner: " + subOrder.getOwnerId())));
 
